@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">CalorieCounter</string>
 
+    <string name="label_my_profile">My Profile</string>
     <string name="label_name_owner">Your Name: </string>
     <string name="label_dob_owner">Date of birth: </string>
     <string name="label_height_owner">Height: </string>
     <string name="label_weight_owner">Weight: </string>
 
-    <string name="label_choose_pet">Choose your pet: </string>
+    <string name="label_choose_pet">Choose your pet </string>
     <string name="label_name_pet">Pet\'s Name: </string>
 
+    <string name="label_pet_profile">Pet\'s Profile</string>
     <string name="label_name_detail_pet">Hi, I am </string>
 
     <string name="label_feed_me">Feed me</string>
@@ -18,5 +20,9 @@
     <string name="label_lunch">Lunch</string>
     <string name="label_dinner">Dinner</string>
     <string name="label_snack">Snack</string>
+
+    <string name="label_next">Next</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>

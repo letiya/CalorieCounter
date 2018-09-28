@@ -37,3 +37,4 @@ dependencies {
     // Google mobile ads library
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
 }
+apply plugin: 'com.google.gms.google-services'

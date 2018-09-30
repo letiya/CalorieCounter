@@ -17,6 +17,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".PetActivity"
+            android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop"/>
+
         <activity android:name=".SettingsActivity"/>
 
     </application>

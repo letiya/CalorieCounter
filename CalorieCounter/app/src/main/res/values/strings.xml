@@ -7,6 +7,11 @@
     <string name="label_height_owner">Height: </string>
     <string name="label_weight_owner">Weight: </string>
 
+    <string name="hint_name_owner">Enter User Name</string>
+    <string name="hint_dob_owner">Enter D.O.B (YYYY/MM/DD)</string>
+    <string name="hint_height_owner">Enter User Height (cm)</string>
+    <string name="hint_weight_owner">Enter User Weight (kg)</string>
+
     <string name="label_choose_pet">Choose your pet </string>
     <string name="label_name_pet">Pet\'s Name: </string>
 

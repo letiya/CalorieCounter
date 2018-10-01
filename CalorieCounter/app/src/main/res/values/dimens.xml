@@ -8,4 +8,6 @@
     <dimen name="iv_small_icon">20dp</dimen>
     <dimen name="iv_margin_small">16dp</dimen>
 
+    <dimen name="bt_margin_small">16dp</dimen>
+
 </resources>

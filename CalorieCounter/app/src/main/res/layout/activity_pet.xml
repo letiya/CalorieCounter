@@ -35,41 +35,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="@dimen/tv_margin_small"
             android:layout_marginLeft="@dimen/tv_margin_small"
+            android:layout_marginRight="@dimen/tv_margin_small"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_name_pet"
+            <ImageView
+                android:layout_width="@dimen/iv_small_icon"
+                android:layout_height="@dimen/iv_small_icon"
+                android:src="@drawable/ic_launcher_background"
+                android:layout_marginTop="@dimen/iv_margin_small"
                 />
 
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:id="@+id/et_petname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_name_opet"
+                />
 
         </LinearLayout>
 
-        <Button
+        <ImageView
+            android:id="@+id/iv_pet1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/tv_margin_small"
-            tools:text="Pet A"
+            android:src="@drawable/ic_launcher_foreground"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_marginLeft="@dimen/iv_margin_small"
+            android:layout_gravity="center"
             />
 
-        <Button
+        <ImageView
+            android:id="@+id/iv_pet2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/tv_margin_small"
-            tools:text="Pet B"
+            android:src="@drawable/ic_launcher_foreground"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_marginLeft="@dimen/iv_margin_small"
+            android:layout_gravity="center"
             />
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/bt_choose_pet_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/tv_margin_small"
+        android:layout_margin="@dimen/bt_margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/label_next"

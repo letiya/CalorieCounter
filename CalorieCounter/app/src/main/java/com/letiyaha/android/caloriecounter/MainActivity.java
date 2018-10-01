@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.et_weight)
     EditText mEtWeight;
 
-    @BindView(R.id.bt_my_profile_enxt)
+    @BindView(R.id.bt_my_profile_next)
     Button mBtNext;
 
     @Override

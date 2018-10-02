@@ -30,41 +30,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="@dimen/tv_margin_small"
+        android:layout_marginTop="@dimen/ll_margin_small"
+        android:layout_marginLeft="@dimen/ll_margin_small"
+        android:layout_marginRight="@dimen/ll_margin_small"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_name_detail_pet"
+            android:textSize="@dimen/tv_content_size"
             />
 
-        <EditText
+        <TextView
+            android:id="@+id/tv_pet_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/tv_content_size"
+            />
 
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/iv_pet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"
-        android:layout_margin="@dimen/tv_margin_small"
+        android:layout_marginTop="@dimen/iv_margin_small"
+        android:layout_marginLeft="@dimen/iv_margin_small"
         android:layout_gravity="center"
+        tools:src="@drawable/ic_launcher_foreground"
         />
 
     <Button
+        android:id="@+id/bt_feed_me"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_feed_me"
-        android:layout_marginLeft="@dimen/tv_margin_small"
+        android:layout_marginTop="@dimen/bt_margin_small"
+        android:layout_marginLeft="@dimen/bt_margin_small"
+        android:layout_marginRight="@dimen/bt_margin_small"
         />
 
     <Button
+        android:id="@+id/bt_pet_health"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_health_cond"
-        android:layout_marginLeft="@dimen/tv_margin_small"
+        android:layout_marginTop="@dimen/bt_margin_small"
+        android:layout_marginLeft="@dimen/bt_margin_small"
+        android:layout_marginRight="@dimen/bt_margin_small"
         />
 
 </LinearLayout>

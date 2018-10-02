@@ -111,11 +111,12 @@ public class Database {
     /**
      * Read all data in PetProfile node
      */
-    public void selectPetProfile() {
+    public void readPetProfile(final ReadPetProfileCallback readPetProfileCallback) {
         mPetProfileEndPoint.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 PetProfile petProfile = dataSnapshot.getValue(PetProfile.class);
+                readPetProfileCallback.onCallback(petProfile);
             }
 
             @Override
@@ -123,6 +124,13 @@ public class Database {
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         });
+    }
+
+    /**
+     * To wait for database to return the data 'PetProfile'
+     */
+    public interface ReadPetProfileCallback {
+        void onCallback(PetProfile petProfile);
     }
 
     /**

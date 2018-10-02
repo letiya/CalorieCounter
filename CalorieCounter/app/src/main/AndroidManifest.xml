@@ -27,6 +27,16 @@
             android:parentActivityName=".PetActivity"
             android:launchMode="singleTop"/>
 
+        <activity
+            android:name=".MealActivity"
+            android:parentActivityName=".PetDetailActivity"
+            android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".HealthActivity"
+            android:parentActivityName=".PetDetailActivity"
+            android:launchMode="singleTop"/>
+
         <activity android:name=".SettingsActivity"/>
 
     </application>

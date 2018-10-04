@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.letiyaha.android.caloriecounter.MainActivity"
     >
 
     <android.support.v7.widget.Toolbar
@@ -20,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_my_profile"
+            android:text="@string/label_udpate_my_profile"
             style="@style/ToolbarText"
             />
 
@@ -53,7 +52,6 @@
                 android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_name_owner"
                 />
 
         </LinearLayout>
@@ -78,7 +76,6 @@
                 android:id="@+id/et_dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_dob_owner"
                 android:maxLength="10"
                 />
 
@@ -95,10 +92,9 @@
 
             <EditText
                 android:id="@+id/et_height"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="@string/hint_height_owner"
                 />
 
         </LinearLayout>
@@ -114,10 +110,9 @@
 
             <EditText
                 android:id="@+id/et_weight"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="@string/hint_weight_owner"
                 />
 
         </LinearLayout>
@@ -125,13 +120,13 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/bt_my_profile_next"
+        android:id="@+id/bt_my_profile_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bt_margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/label_next"
+        android:text="@string/label_finish"
         />
 
 </android.support.constraint.ConstraintLayout>

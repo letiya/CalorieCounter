@@ -75,11 +75,12 @@ public class Database {
     /**
      * Read all data in Profile node
      */
-    public void readProfile() {
+    public void readProfile(final ReadProfileCallback readProfileCallback) {
         mProfileEndPoint.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Profile profile = dataSnapshot.getValue(Profile.class);
+                readProfileCallback.onCallback(profile);
             }
 
             @Override
@@ -87,6 +88,13 @@ public class Database {
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         });
+    }
+
+    /**
+     * To wait for database to return the data 'Profile'
+     */
+    public interface ReadProfileCallback {
+        void onCallback(Profile profile);
     }
 
     /**

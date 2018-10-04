@@ -46,7 +46,7 @@ public class PetDetailActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
-//        setSupportActionBar(mToolbar);
+        setSupportActionBar(mToolbar);
 
         // 1. Set up pet name/image.
         Database db = Database.getInstance();

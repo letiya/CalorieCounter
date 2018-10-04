@@ -2,6 +2,7 @@
     <string name="app_name">CalorieCounter</string>
 
     <string name="label_my_profile">My Profile</string>
+    <string name="label_udpate_my_profile">Update My Profile</string>
     <string name="label_name_owner">Your Name: </string>
     <string name="label_dob_owner">Date of birth: </string>
     <string name="label_height_owner">Height: </string>
@@ -29,7 +30,10 @@
     <string name="label_snack">Snack</string>
 
     <string name="label_next">Next</string>
+    <string name="label_finish">Finish</string>
 
     <string name="action_settings">Settings</string>
+    <string name="label_update_profile">Update your profile</string>
+    <string name="label_change_pet">Change your pet</string>
 
 </resources>

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.letiyaha.android.caloriecounter.Models.Database;
+import com.letiyaha.android.caloriecounter.Models.Util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (mEtUsername.getText().toString().length() == 0 || mEtDob.getText().toString().length() == 0 || mEtHeight.getText().toString().length() == 0 || mEtWeight.getText().toString().length() == 0) {
                     Toast.makeText(mContext, "Required field is blank!", Toast.LENGTH_SHORT).show();
-                } else if (!isDateValid(mEtDob.getText().toString(), "yyyy/MM/dd")) {
+                } else if (!Util.isDateValid(mEtDob.getText().toString(), "yyyy/MM/dd")) {
                     Toast.makeText(mContext, "Date of birth format is incorrect!", Toast.LENGTH_SHORT).show();
-                } else if (!isNumber(mEtHeight.getText().toString())) {
+                } else if (!Util.isNumber(mEtHeight.getText().toString())) {
                     Toast.makeText(mContext, "Entered height is not a number!", Toast.LENGTH_SHORT).show();
-                } else if (!isNumber(mEtWeight.getText().toString())) {
+                } else if (!Util.isNumber(mEtWeight.getText().toString())) {
                     Toast.makeText(mContext, "Entered weight is not a number!", Toast.LENGTH_SHORT).show();
                 } else {
                     // 1. Save data to db
@@ -67,41 +68,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    /**
-     * To verify if input date follows the format.
-     * @param dateToValidate
-     * @param dateFromat - ex: 2018/10/01
-     * @return true if dateToValidate follows the format.
-     */
-    private boolean isDateValid(String dateToValidate, String dateFromat) {
-        if(dateToValidate == null){
-            return false;
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFromat);
-        sdf.setLenient(false);
-        try {
-            //if not valid, it will throw ParseException
-            Date date = sdf.parse(dateToValidate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * To verify input string is a number.
-     * @param string
-     * @return true if input string is a number.
-     */
-    private boolean isNumber(String string) {
-        try {
-            double d = Double.parseDouble(string);
-        } catch(NumberFormatException e) {
-            return false;
-        }
-        return true;
     }
 }

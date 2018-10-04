@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.letiyaha.android.caloriecounter">
 
     <application
@@ -37,7 +38,19 @@
             android:parentActivityName=".PetDetailActivity"
             android:launchMode="singleTop"/>
 
-        <activity android:name=".SettingsActivity"/>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/action_settings"
+            android:parentActivityName=".PetDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PetDetailActivity" />
+        </activity>
+
+        <activity
+            android:name=".UpdateProfile"
+            android:parentActivityName=".SettingsActivity"
+            android:launchMode="singleTop"/>
 
     </application>
 

@@ -26,32 +26,120 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_breakfast"
-        android:layout_marginLeft="@dimen/tv_margin_small"
-        />
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/ll_margin_small"
+        android:layout_marginLeft="@dimen/ll_margin_small"
+        android:layout_marginRight="@dimen/ll_margin_small"
+        >
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_lunch"
-        android:layout_marginLeft="@dimen/tv_margin_small"
-        />
+        <ImageView
+            android:layout_width="@dimen/iv_small_icon"
+            android:layout_height="@dimen/iv_small_icon"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_marginRight="@dimen/iv_margin_small"
+            android:layout_marginEnd="@dimen/iv_margin_small"
+            />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_dinner"
-        android:layout_marginLeft="@dimen/tv_margin_small"
-        />
+        <TextView
+            android:id="@+id/tv_breakfast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:text="@string/label_breakfast"
+            android:textSize="@dimen/tv_content_size"
+            />
 
-    <Button
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_snack"
-        android:layout_marginLeft="@dimen/tv_margin_small"
-        />
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/ll_margin_small"
+        android:layout_marginLeft="@dimen/ll_margin_small"
+        android:layout_marginRight="@dimen/ll_margin_small"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/iv_small_icon"
+            android:layout_height="@dimen/iv_small_icon"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_marginRight="@dimen/iv_margin_small"
+            android:layout_marginEnd="@dimen/iv_margin_small"
+            />
+
+        <TextView
+            android:id="@+id/tv_lunch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:text="@string/label_lunch"
+            android:textSize="@dimen/tv_content_size"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/ll_margin_small"
+        android:layout_marginLeft="@dimen/ll_margin_small"
+        android:layout_marginRight="@dimen/ll_margin_small"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/iv_small_icon"
+            android:layout_height="@dimen/iv_small_icon"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_marginRight="@dimen/iv_margin_small"
+            android:layout_marginEnd="@dimen/iv_margin_small"
+            />
+
+        <TextView
+            android:id="@+id/tv_dinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:text="@string/label_dinner"
+            android:textSize="@dimen/tv_content_size"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/ll_margin_small"
+        android:layout_marginLeft="@dimen/ll_margin_small"
+        android:layout_marginRight="@dimen/ll_margin_small"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/iv_small_icon"
+            android:layout_height="@dimen/iv_small_icon"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_marginRight="@dimen/iv_margin_small"
+            android:layout_marginEnd="@dimen/iv_margin_small"
+            />
+
+        <TextView
+            android:id="@+id/tv_snack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:text="@string/label_snack"
+            android:textSize="@dimen/tv_content_size"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

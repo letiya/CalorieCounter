@@ -52,6 +52,11 @@
             android:parentActivityName=".SettingsActivity"
             android:launchMode="singleTop"/>
 
+        <activity
+            android:name=".MealDetailActivity"
+            android:parentActivityName=".MealActivity"
+            android:launchMode="singleTop"/>
+
     </application>
 
 </manifest>

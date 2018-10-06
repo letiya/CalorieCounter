@@ -72,7 +72,7 @@ public class UpdateProfile extends AppCompatActivity {
                 if (mEtWeight.getText().toString().length() != 0 && Util.isNumber(mEtWeight.getText().toString())) {
                     db.updateProfile("weight", mEtWeight.getText().toString());
                 }
-                // 2. Start another activity.
+                // 2. Go back to PetDetailActivity.
                 Intent intentToStartPetDetailActivity = new Intent(mContext, PetDetailActivity.class);
                 startActivity(intentToStartPetDetailActivity);
             }

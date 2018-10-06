@@ -8,6 +8,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class Database {
 
     private static final String TAG = Database.class.getSimpleName();
@@ -145,15 +147,18 @@ public class Database {
      * Read all data key-value pair by key-value pair in databaseReference node
      * @param databaseReference
      */
-    private void selectFood(DatabaseReference databaseReference) {
+    private void selectFood(DatabaseReference databaseReference, final SelectFoodCallback selectFoodCallback) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, String> foodInfo = new HashMap<String, String>();
                 // Go through all key-value pairs.
                 for (DataSnapshot ds : dataSnapshot.getChildren() ){
                     String foodName = ds.getKey().toString(); // Get all keys alphabetically
                     String foodImage = ds.getValue().toString(); // Get all values alphabetically
+                    foodInfo.put(foodName, foodImage);
                 }
+                selectFoodCallback.onCallback(foodInfo);
             }
 
             @Override
@@ -161,45 +166,53 @@ public class Database {
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         });
+    }
+
+    /**
+     * To wait for database to return the data 'foodInfo'
+     */
+    public interface SelectFoodCallback {
+        void onCallback(HashMap<String, String> foodInfo);
     }
 
     /**
      * Read all data in Breakfast node
      */
-    public void selectBreakfast() {
-        selectFood(mBreakfastEndPoint);
+    public void selectBreakfast(SelectFoodCallback selectFoodCallback) {
+        selectFood(mBreakfastEndPoint, selectFoodCallback);
     }
 
     /**
      * Read all data in Lunch node
      */
-    public void selectLunch() {
-        selectFood(mLunchEndPoint);
+    public void selectLunch(SelectFoodCallback selectFoodCallback) {
+        selectFood(mLunchEndPoint, selectFoodCallback);
     }
 
     /**
      * Read all data in Dinner node
      */
-    public void selectDinner() {
-        selectFood(mDinnerEndPoint);
+    public void selectDinner(SelectFoodCallback selectFoodCallback) {
+        selectFood(mDinnerEndPoint, selectFoodCallback);
     }
 
     /**
      * Read all data in Snack node
      */
-    public void selectSnack() {
-        selectFood(mSnackEndPoint);
+    public void selectSnack(SelectFoodCallback selectFoodCallback) {
+        selectFood(mSnackEndPoint, selectFoodCallback);
     }
 
     /**
-     * Read calorie of 'foodName' in FoodCal node
+     * Read calories of 'foodName' in FoodCal node
      * @param foodName - ex: apple
      */
-    public void selectFoodCal(final String foodName) {
+    public void selectFoodCal(final String foodName, final SelectFoodCalCallback selectFoodCalCallback) {
         mFoodCalEndPoint.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String foodCal = dataSnapshot.child(foodName).getValue().toString();
+                selectFoodCalCallback.onCallback(foodCal);
             }
 
             @Override
@@ -207,6 +220,46 @@ public class Database {
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         });
+    }
+
+    /**
+     * To wait for database to return the data 'foodCal'
+     */
+    public interface SelectFoodCalCallback {
+        void onCallback(String foodCal);
+    }
+
+    /**
+     * Read calories of clicked food in FoodCal node
+     * @param foodClicked
+     * @param selectClickedFoodCalCallback
+     */
+    public void seletClickedFoodCal(final HashMap<String, Boolean> foodClicked, final SelectClickedFoodCalCallback selectClickedFoodCalCallback) {
+        mFoodCalEndPoint.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int totalCal = 0;
+                for (String foodName : foodClicked.keySet()) {
+                    if (foodClicked.get(foodName)) {
+                        String foodCal = dataSnapshot.child(foodName).getValue().toString();
+                        totalCal += Integer.parseInt(foodCal);
+                    }
+                }
+                selectClickedFoodCalCallback.onCallback(totalCal);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+
+    /**
+     * To wait for database to return the data 'totalCal'
+     */
+    public interface SelectClickedFoodCalCallback {
+        void onCallback(int totalCal);
     }
 
     /**

@@ -12,10 +12,6 @@ import android.widget.Toast;
 import com.letiyaha.android.caloriecounter.Models.Database;
 import com.letiyaha.android.caloriecounter.Models.Util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

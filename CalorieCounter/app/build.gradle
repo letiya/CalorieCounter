@@ -38,5 +38,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     // recyclerview dependency
     compile 'com.android.support:recyclerview-v7:27.1.1'
+    // MPAndroid Chart
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }
 apply plugin: 'com.google.gms.google-services'

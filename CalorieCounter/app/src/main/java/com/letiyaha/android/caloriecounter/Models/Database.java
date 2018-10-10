@@ -8,6 +8,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Database {
@@ -269,19 +272,27 @@ public class Database {
      * @param value ex: 500, 600
      */
     public void updateCalorieLog(String datetime, String key, int value) {
-        mCalorieLogEndPoint.child(datetime).child(key).setValue(value);
+        mCalorieLogEndPoint.child(datetime).child(key).setValue(value + "");
     }
 
     /**
-     * Read calorie intake on 'date' in CalorieLog node
-     * @param date - ex: 20180101
+     * Select calorie intake of this 'date'
+     * @param selectCalorieLogCallback
+     * @param date - ex:20181010
      */
-    public void selectOneDayCalorie(String date) {
-        mCalorieLogEndPoint.child(date).addValueEventListener(new ValueEventListener() {
+    public void selectCalorieLog(final SelectCalorieLogCallback selectCalorieLogCallback, String date) {
+        DatabaseReference calorieDateEndPoint = mCalorieLogEndPoint.child(date);
+        calorieDateEndPoint.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                CalorieLog calorieLog = dataSnapshot.getValue(CalorieLog.class);
-                calorieLog.sum();
+                HashMap<String, String> calInfo = new HashMap<String, String>();
+                // Go through all key-value pairs.
+                for (DataSnapshot ds : dataSnapshot.getChildren() ){
+                    String meal = ds.getKey().toString(); // Get all keys alphabetically
+                    String cal = ds.getValue().toString(); // Get all values alphabetically
+                    calInfo.put(meal, cal);
+                }
+                selectCalorieLogCallback.onCallback(calInfo);
             }
 
             @Override
@@ -289,5 +300,93 @@ public class Database {
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         });
+    }
+
+    /**
+     * To wait for database to return the data 'calInfo'
+     */
+    public interface SelectCalorieLogCallback {
+        void onCallback(HashMap<String, String> calInfo);
+    }
+
+    /**
+     * Select calorie intake of a week before now
+     * @param selectWeekCalorieLogCallback
+     */
+    public void selectWeekCalorieLog(final SelectWeekCalorieLogCallback selectWeekCalorieLogCallback) {
+        mCalorieLogEndPoint.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, HashMap<String, Integer>> weekDateCals = new HashMap<String, HashMap<String, Integer>>();
+                for (int i = 0; i < 7; i++) {
+                    HashMap<String, Integer> mealCals = new HashMap<>();
+
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.DATE, -i);
+                    Date date = cal.getTime();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                    final String dateString = sdf.format(date);
+
+                    for (DataSnapshot ds : dataSnapshot.child(dateString).getChildren()) {
+                        String key = ds.getKey().toString(); // meal
+                        String value = ds.getValue().toString(); // calorie
+                        mealCals.put(key, Integer.parseInt(value));
+                    }
+                    weekDateCals.put(dateString, mealCals);
+                }
+                selectWeekCalorieLogCallback.onCallback(weekDateCals);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+
+    /**
+     * To wait for database to return the data 'weekDateCals'
+     */
+    public interface SelectWeekCalorieLogCallback {
+        void onCallback(HashMap<String, HashMap<String, Integer>> weekDateCals);
+    }
+
+    /**
+     * Select calorie intake of a month before now
+     * @param selectMonthCalorieLogCallback
+     */
+    public void selectMonthCalorieLog(final SelectMonthCalorieLogCallback selectMonthCalorieLogCallback) {
+        mCalorieLogEndPoint.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, Integer> monthDateCals = new HashMap<>();
+                for (int i = 0; i < 30; i++) {
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.DATE, -i);
+                    Date date = cal.getTime();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                    final String dateString = sdf.format(date);
+
+                    int cals = 0;
+                    for (DataSnapshot ds : dataSnapshot.child(dateString).getChildren()) {
+                        cals += Integer.parseInt(ds.getValue().toString()); // calorie
+                    }
+                    monthDateCals.put(dateString, cals);
+                }
+                selectMonthCalorieLogCallback.onCallback(monthDateCals);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+
+    /**
+     * To wait for database to return the data 'monthDateCals'
+     */
+    public interface SelectMonthCalorieLogCallback {
+        void onCallback(HashMap<String, Integer> monthDateCals);
     }
 }

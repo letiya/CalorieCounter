@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,57 +24,77 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/ll_margin_small"
-        android:layout_marginLeft="@dimen/ll_margin_small"
-        android:layout_marginRight="@dimen/ll_margin_small"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
         >
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/ll_margin_small"
+            android:layout_marginLeft="@dimen/ll_margin_small"
+            android:layout_marginRight="@dimen/ll_margin_small"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_name_detail_pet"
+                android:textSize="@dimen/tv_content_size"
+                />
+
+            <TextView
+                android:id="@+id/tv_pet_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tv_content_size"
+                />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_pet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_name_detail_pet"
-            android:textSize="@dimen/tv_content_size"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_marginLeft="@dimen/iv_margin_small"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_launcher_foreground"
             />
 
-        <TextView
-            android:id="@+id/tv_pet_name"
+        <Button
+            android:id="@+id/bt_feed_me"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/tv_content_size"
+            android:text="@string/label_feed_me"
+            android:layout_marginTop="@dimen/bt_margin_small"
+            android:layout_marginLeft="@dimen/bt_margin_small"
+            android:layout_marginRight="@dimen/bt_margin_small"
+            />
+
+        <Button
+            android:id="@+id/bt_pet_health"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_health_cond"
+            android:layout_marginTop="@dimen/bt_margin_small"
+            android:layout_marginLeft="@dimen/bt_margin_small"
+            android:layout_marginRight="@dimen/bt_margin_small"
             />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_pet"
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/iv_margin_small"
-        android:layout_marginLeft="@dimen/iv_margin_small"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        tools:src="@drawable/ic_launcher_foreground"
-        />
-
-    <Button
-        android:id="@+id/bt_feed_me"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_feed_me"
-        android:layout_marginTop="@dimen/bt_margin_small"
-        android:layout_marginLeft="@dimen/bt_margin_small"
-        android:layout_marginRight="@dimen/bt_margin_small"
-        />
-
-    <Button
-        android:id="@+id/bt_pet_health"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_health_cond"
-        android:layout_marginTop="@dimen/bt_margin_small"
-        android:layout_marginLeft="@dimen/bt_margin_small"
-        android:layout_marginRight="@dimen/bt_margin_small"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
         />
 
 </LinearLayout>

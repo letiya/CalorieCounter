@@ -37,4 +37,6 @@
     <string name="label_update_profile">Update your profile</string>
     <string name="label_change_pet">Change your pet</string>
 
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
 </resources>

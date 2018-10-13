@@ -17,6 +17,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.letiyaha.android.caloriecounter.Models.Database;
 import com.letiyaha.android.caloriecounter.Models.PetProfile;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +25,9 @@ import butterknife.ButterKnife;
 public class PetDetailActivity extends AppCompatActivity {
 
     private Context mContext;
+
+    private static final String IMAGE_PET1 = "https://cdn.pixabay.com/photo/2016/05/12/23/03/lamb-1388937__340.png";
+    private static final String IMAGE_PET2 = "https://cdn.pixabay.com/photo/2016/04/01/08/29/animals-1298747__340.png";
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
 
@@ -59,10 +63,10 @@ public class PetDetailActivity extends AppCompatActivity {
             @Override
             public void onCallback(PetProfile petProfile) {
                 mTvPetname.setText(" " + petProfile.getPetName());
-                if (petProfile.getPetImage().equals("")) { // TODO (3)
-
-                } else { // TODO (4)
-
+                if (petProfile.getPetImage().equals(IMAGE_PET1)) { // TODO (3)
+                    Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet);
+                } else if (petProfile.getPetImage().equals(IMAGE_PET2)) { // TODO (4)
+                    Picasso.with(mContext).load(IMAGE_PET2).into(mIvPet);
                 }
             }
         });

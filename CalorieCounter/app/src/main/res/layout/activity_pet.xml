@@ -60,7 +60,6 @@
             android:id="@+id/iv_pet1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_foreground"
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginLeft="@dimen/iv_margin_small"
             android:layout_gravity="center"

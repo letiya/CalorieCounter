@@ -7,14 +7,36 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
+import com.letiyaha.android.caloriecounter.Models.Database;
+import com.letiyaha.android.caloriecounter.Models.PetProfile;
+import com.squareup.picasso.Picasso;
+
 public class PetWidgetProvider extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+    static void updateAppWidget(final Context context, AppWidgetManager appWidgetManager, final int appWidgetId) {
         // Create an Intent to launch PetDetailActivity when clicked
         Intent intent = new Intent(context, PetDetailActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pet_widget);
+        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pet_widget);
+
+
+        Database db = Database.getInstance();
+        db.readPetProfile(new Database.ReadPetProfileCallback() {
+            @Override
+            public void onCallback(PetProfile petProfile) {
+                String petName = petProfile.getPetName();
+                String petImage = petProfile.getPetImage();
+
+                int[] appWidgetIds = {appWidgetId};
+
+                Picasso.with(context)
+                        .load(petImage)
+                        .into(views, R.id.widget_pet_image, appWidgetIds);
+            }
+        });
+
+
 
         // TODO (5)
         // Set up pet name for the widget.
@@ -35,4 +57,5 @@ public class PetWidgetProvider extends AppWidgetProvider {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
+
 }

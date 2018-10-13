@@ -6,7 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +22,11 @@ public class MealFragment extends Fragment {
     private static final String LUNCH = "Lunch";
     private static final String DINNER = "Dinner";
     private static final String SNACK = "Snack";
+
+    private static final String ICON_BREAKFAST = "https://images.pexels.com/photos/920220/pexels-photo-920220.jpeg?auto=compress&cs=tinysrgb&h=350";
+
+    @BindView(R.id.iv_breakfast)
+    ImageView mIvBreakfast;
 
     @BindView(R.id.tv_breakfast)
     TextView mTvBreakfast;
@@ -48,6 +56,8 @@ public class MealFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         mContext = rootView.getContext();
+
+        Picasso.with(mContext).load(ICON_BREAKFAST).into(mIvBreakfast);
 
         // 1. Set up click for 'Breakfast'
         mTvBreakfast.setOnClickListener(new View.OnClickListener() {

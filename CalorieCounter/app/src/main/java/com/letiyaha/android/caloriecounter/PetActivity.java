@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.letiyaha.android.caloriecounter.Models.Database;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +21,9 @@ public class PetActivity extends AppCompatActivity {
     private Context mContext;
     private ImageView mSelectedPet;
     private String mImageSrc;
+
+    private static final String IMAGE_PET1 = "https://cdn.pixabay.com/photo/2016/05/12/23/03/lamb-1388937__340.png";
+    private static final String IMAGE_PET2 = "https://cdn.pixabay.com/photo/2016/04/01/08/29/animals-1298747__340.png";
 
     @BindView(R.id.et_petname)
     EditText mEtPetname;
@@ -42,19 +46,23 @@ public class PetActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
+        Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet1);
+
         mIvPet1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSelectedPet = mIvPet1;
-                mImageSrc = ""; // TODO (1)
+                mImageSrc = IMAGE_PET1; // TODO (1)
             }
         });
+
+        Picasso.with(mContext).load(IMAGE_PET2).into(mIvPet2);
 
         mIvPet2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSelectedPet = mIvPet2;
-                mImageSrc = ""; // TODO (2)
+                mImageSrc = IMAGE_PET2; // TODO (2)
             }
         });
 

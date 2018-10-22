@@ -39,9 +39,10 @@
             android:id="@+id/iv_breakfast"
             android:layout_width="@dimen/iv_large_icon"
             android:layout_height="@dimen/iv_large_icon"
-            android:src="@drawable/ic_launcher_background"
             android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_marginRight="@dimen/iv_margin_small"
             android:layout_marginEnd="@dimen/iv_margin_small"
+            tools:src="@drawable/ic_launcher_background"
             />
 
         <TextView
@@ -66,12 +67,13 @@
         >
 
         <ImageView
-            android:layout_width="@dimen/iv_small_icon"
-            android:layout_height="@dimen/iv_small_icon"
-            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/iv_lunch"
+            android:layout_width="@dimen/iv_large_icon"
+            android:layout_height="@dimen/iv_large_icon"
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginRight="@dimen/iv_margin_small"
             android:layout_marginEnd="@dimen/iv_margin_small"
+            tools:src="@drawable/ic_launcher_background"
             />
 
         <TextView
@@ -79,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_gravity="center"
             android:text="@string/label_lunch"
             android:textSize="@dimen/tv_content_size"
             />
@@ -95,12 +98,13 @@
         >
 
         <ImageView
-            android:layout_width="@dimen/iv_small_icon"
-            android:layout_height="@dimen/iv_small_icon"
-            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/iv_dinner"
+            android:layout_width="@dimen/iv_large_icon"
+            android:layout_height="@dimen/iv_large_icon"
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginRight="@dimen/iv_margin_small"
             android:layout_marginEnd="@dimen/iv_margin_small"
+            tools:src="@drawable/ic_launcher_background"
             />
 
         <TextView
@@ -108,6 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_gravity="center"
             android:text="@string/label_dinner"
             android:textSize="@dimen/tv_content_size"
             />
@@ -124,12 +129,13 @@
         >
 
         <ImageView
-            android:layout_width="@dimen/iv_small_icon"
-            android:layout_height="@dimen/iv_small_icon"
-            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/iv_snack"
+            android:layout_width="@dimen/iv_large_icon"
+            android:layout_height="@dimen/iv_large_icon"
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginRight="@dimen/iv_margin_small"
             android:layout_marginEnd="@dimen/iv_margin_small"
+            tools:src="@drawable/ic_launcher_background"
             />
 
         <TextView
@@ -137,6 +143,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_gravity="center"
             android:text="@string/label_snack"
             android:textSize="@dimen/tv_content_size"
             />

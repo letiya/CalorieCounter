@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.letiyaha.android.caloriecounter.Models.Database;
 import com.letiyaha.android.caloriecounter.Models.Util;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,6 +20,17 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     private Context mContext;
+
+    private static final String ICON_USER = "https://cdn.pixabay.com/photo/2016/04/26/12/25/male-1354358__480.png";
+//    private static final String ICON_USER = "https://cdn.pixabay.com/photo/2016/04/15/18/05/computer-1331579__480.png";
+
+    private static final String ICON_DOB = "https://cdn.pixabay.com/photo/2012/04/05/00/42/cake-25388__480.png";
+
+    @BindView(R.id.iv_user_name)
+    ImageView mIvUsername;
+
+    @BindView(R.id.iv_dob)
+    ImageView mIvDob;
 
     @BindView(R.id.et_username)
     EditText mEtUsername;
@@ -43,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
+        Picasso.with(mContext).load(ICON_USER).into(mIvUsername);
+        Picasso.with(mContext).load(ICON_DOB).into(mIvDob);
+
         mBtNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     // 1. Save data to db
                     Database db = Database.getInstance();
                     db.insertProfile(mEtUsername.getText().toString(), mEtDob.getText().toString(), mEtHeight.getText().toString(), mEtWeight.getText().toString());
-                    // 2. Start another activity.
+                    // 2. Go to PetActivity.
                     Intent intentToStartPetActivity = new Intent(mContext, PetActivity.class);
                     startActivity(intentToStartPetActivity);
                 }

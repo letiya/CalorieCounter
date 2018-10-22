@@ -28,6 +28,7 @@ public class PetDetailActivity extends AppCompatActivity {
 
     private static final String IMAGE_PET1 = "https://cdn.pixabay.com/photo/2016/05/12/23/03/lamb-1388937__340.png";
     private static final String IMAGE_PET2 = "https://cdn.pixabay.com/photo/2016/04/01/08/29/animals-1298747__340.png";
+    private static final String IMAGE_PET3 = "https://cdn.pixabay.com/photo/2014/10/02/15/43/zebra-470305__480.png";
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
 
@@ -63,10 +64,12 @@ public class PetDetailActivity extends AppCompatActivity {
             @Override
             public void onCallback(PetProfile petProfile) {
                 mTvPetname.setText(" " + petProfile.getPetName());
-                if (petProfile.getPetImage().equals(IMAGE_PET1)) { // TODO (3)
+                if (petProfile.getPetImage().equals(IMAGE_PET1)) {
                     Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet);
-                } else if (petProfile.getPetImage().equals(IMAGE_PET2)) { // TODO (4)
+                } else if (petProfile.getPetImage().equals(IMAGE_PET2)) {
                     Picasso.with(mContext).load(IMAGE_PET2).into(mIvPet);
+                }  else if (petProfile.getPetImage().equals(IMAGE_PET3)) {
+                    Picasso.with(mContext).load(IMAGE_PET3).into(mIvPet);
                 }
             }
         });

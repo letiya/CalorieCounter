@@ -43,16 +43,19 @@
             >
 
             <ImageView
-                android:layout_width="@dimen/iv_small_icon"
-                android:layout_height="@dimen/iv_small_icon"
-                android:src="@drawable/ic_launcher_background"
+                android:id="@+id/iv_user_name"
+                android:layout_width="@dimen/iv_large_icon"
+                android:layout_height="@dimen/iv_large_icon"
                 android:layout_marginTop="@dimen/iv_margin_small"
+                android:layout_marginRight="@dimen/iv_margin_small"
+                tools:src="@drawable/ic_launcher_background"
                 />
 
             <EditText
                 android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/iv_margin_small"
                 android:hint="@string/hint_name_owner"
                 />
 
@@ -68,10 +71,12 @@
             >
 
             <ImageView
-                android:layout_width="@dimen/iv_small_icon"
-                android:layout_height="@dimen/iv_small_icon"
-                android:src="@drawable/ic_launcher_background"
+                android:id="@+id/iv_dob"
+                android:layout_width="@dimen/iv_large_icon"
+                android:layout_height="@dimen/iv_large_icon"
                 android:layout_marginTop="@dimen/iv_margin_small"
+                android:layout_marginRight="@dimen/iv_margin_small"
+                tools:src="@drawable/ic_launcher_background"
                 />
 
             <EditText
@@ -79,6 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_dob_owner"
+                android:layout_marginTop="@dimen/iv_margin_small"
                 android:maxLength="10"
                 />
 

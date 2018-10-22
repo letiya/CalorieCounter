@@ -41,17 +41,20 @@
             >
 
             <ImageView
-                android:layout_width="@dimen/iv_small_icon"
-                android:layout_height="@dimen/iv_small_icon"
-                android:src="@drawable/ic_launcher_background"
+                android:id="@+id/iv_pet"
+                android:layout_width="@dimen/iv_large_icon"
+                android:layout_height="@dimen/iv_large_icon"
+                android:layout_marginRight="@dimen/iv_margin_small"
                 android:layout_marginTop="@dimen/iv_margin_small"
+                tools:src="@drawable/ic_launcher_background"
                 />
 
             <EditText
                 android:id="@+id/et_petname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_name_opet"
+                android:hint="@string/hint_name_pet"
+                android:layout_marginTop="@dimen/iv_margin_small"
                 />
 
         </LinearLayout>
@@ -63,16 +66,27 @@
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginLeft="@dimen/iv_margin_small"
             android:layout_gravity="center"
+            tools:src="@drawable/ic_launcher_foreground"
             />
 
         <ImageView
             android:id="@+id/iv_pet2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_foreground"
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginLeft="@dimen/iv_margin_small"
             android:layout_gravity="center"
+            tools:src="@drawable/ic_launcher_foreground"
+            />
+
+        <ImageView
+            android:id="@+id/iv_pet3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/iv_margin_small"
+            android:layout_marginLeft="@dimen/iv_margin_small"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_launcher_foreground"
             />
 
     </LinearLayout>

@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.letiyaha.android.caloriecounter.Models.Database;
 import com.letiyaha.android.caloriecounter.Models.Profile;
 import com.letiyaha.android.caloriecounter.Models.Util;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,6 +20,17 @@ import butterknife.ButterKnife;
 public class UpdateProfile extends AppCompatActivity {
 
     private Context mContext;
+
+    private static final String ICON_USER = "https://cdn.pixabay.com/photo/2016/04/26/12/25/male-1354358__480.png";
+//    private static final String ICON_USER = "https://cdn.pixabay.com/photo/2016/04/15/18/05/computer-1331579__480.png";
+
+    private static final String ICON_DOB = "https://cdn.pixabay.com/photo/2012/04/05/00/42/cake-25388__480.png";
+
+    @BindView(R.id.iv_user_name)
+    ImageView mIvUsername;
+
+    @BindView(R.id.iv_dob)
+    ImageView mIvDob;
 
     @BindView(R.id.et_username)
     EditText mEtUsername;
@@ -42,6 +55,9 @@ public class UpdateProfile extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mContext = getApplicationContext();
+
+        Picasso.with(mContext).load(ICON_USER).into(mIvUsername);
+        Picasso.with(mContext).load(ICON_DOB).into(mIvDob);
 
         // Set up hint displays
         final Database db = Database.getInstance();

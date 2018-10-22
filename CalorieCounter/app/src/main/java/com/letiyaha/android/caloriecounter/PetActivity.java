@@ -1,5 +1,7 @@
 package com.letiyaha.android.caloriecounter;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,8 +24,19 @@ public class PetActivity extends AppCompatActivity {
     private ImageView mSelectedPet;
     private String mImageSrc;
 
+    private static final String IMAGE_PET = "https://cdn.pixabay.com/photo/2016/04/06/17/42/silhouette-1312357__480.png";
+
     private static final String IMAGE_PET1 = "https://cdn.pixabay.com/photo/2016/05/12/23/03/lamb-1388937__340.png";
     private static final String IMAGE_PET2 = "https://cdn.pixabay.com/photo/2016/04/01/08/29/animals-1298747__340.png";
+    private static final String IMAGE_PET3 = "https://cdn.pixabay.com/photo/2014/10/02/15/43/zebra-470305__480.png";
+    private static final String IMAGE_PET4 = "https://cdn.pixabay.com/photo/2014/10/04/22/29/monkey-474147__480.png";
+
+    private static final String PET1 = "Sheep";
+    private static final String PET2 = "Turtle";
+    private static final String PET3 = "Zibra";
+
+    @BindView(R.id.iv_pet)
+    ImageView mIvPet;
 
     @BindView(R.id.et_petname)
     EditText mEtPetname;
@@ -33,6 +46,9 @@ public class PetActivity extends AppCompatActivity {
 
     @BindView(R.id.iv_pet2)
     ImageView mIvPet2;
+
+    @BindView(R.id.iv_pet3)
+    ImageView mIvPet3;
 
     @BindView(R.id.bt_choose_pet_next)
     Button mBtNext;
@@ -46,13 +62,16 @@ public class PetActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
+        Picasso.with(mContext).load(IMAGE_PET).into(mIvPet);
+
         Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet1);
 
         mIvPet1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSelectedPet = mIvPet1;
-                mImageSrc = IMAGE_PET1; // TODO (1)
+                mImageSrc = IMAGE_PET1;
+                Toast.makeText(mContext, PET1 + " is selected!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -62,7 +81,19 @@ public class PetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mSelectedPet = mIvPet2;
-                mImageSrc = IMAGE_PET2; // TODO (2)
+                mImageSrc = IMAGE_PET2;
+                Toast.makeText(mContext, PET2 + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Picasso.with(mContext).load(IMAGE_PET3).into(mIvPet3);
+
+        mIvPet3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSelectedPet = mIvPet3;
+                mImageSrc = IMAGE_PET3;
+                Toast.makeText(mContext, PET3 + " is selected!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,7 +108,15 @@ public class PetActivity extends AppCompatActivity {
                     // 1. Save data to db
                     Database db = Database.getInstance();
                     db.insertPetProfile(mEtPetname.getText().toString(), mImageSrc);
-                    // 2. Start another activity.
+
+                    // 2. Update widget image
+                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
+                    int[] ids = appWidgetManager.getAppWidgetIds(
+                            new ComponentName(getApplicationContext().getPackageName(),
+                                    ".PetWidgetProvider"));
+                    PetWidgetRender.updateWidgetDisplays(mContext, appWidgetManager, ids);
+
+                    // 3. Start PetDetail Activity.
                     Intent intentToStartPetDetailActivity = new Intent(mContext, PetDetailActivity.class);
                     startActivity(intentToStartPetDetailActivity);
                 }

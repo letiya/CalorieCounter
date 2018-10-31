@@ -29,9 +29,15 @@
         </activity>
 
         <activity
+            android:name=".UserActivity"
+            android:launchMode="singleTop"
+            />
+
+        <activity
             android:name=".PetActivity"
-            android:parentActivityName=".MainActivity"
-            android:launchMode="singleTop"/>
+            android:parentActivityName=".UserActivity"
+            android:launchMode="singleTop"
+            />
 
         <receiver android:name=".PetWidgetProvider">
             <intent-filter>
@@ -46,8 +52,8 @@
 
         <activity
             android:name=".PetDetailActivity"
-            android:parentActivityName=".PetActivity"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            />
 
         <activity
             android:name=".MealActivity"

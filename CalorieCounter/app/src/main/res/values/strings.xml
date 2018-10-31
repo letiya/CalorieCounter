@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">CalorieCounter</string>
 
+    <string name="label_loading">Loading...</string>
+
     <string name="label_my_profile">My Profile</string>
     <string name="label_udpate_my_profile">Update My Profile</string>
     <string name="label_name_owner">Your Name: </string>

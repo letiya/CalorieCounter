@@ -55,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_margin_small"
+                android:singleLine="true"
                 />
 
         </LinearLayout>
@@ -83,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:maxLength="10"
+                android:singleLine="true"
                 />
 
         </LinearLayout>
@@ -96,12 +98,37 @@
             android:layout_marginRight="@dimen/ll_margin_small"
             >
 
-            <EditText
-                android:id="@+id/et_height"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+            <ImageView
+                android:id="@+id/iv_height"
+                android:layout_width="@dimen/iv_large_icon"
+                android:layout_height="@dimen/iv_large_icon"
+                android:layout_marginTop="@dimen/iv_margin_small"
+                android:layout_marginRight="@dimen/iv_margin_small"
+                tools:src="@drawable/ic_launcher_background"
                 />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_margin_small"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/label_height_unit"
+                    />
+
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -114,12 +141,37 @@
             android:layout_marginRight="@dimen/ll_margin_small"
             >
 
-            <EditText
-                android:id="@+id/et_weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+            <ImageView
+                android:id="@+id/iv_weight"
+                android:layout_width="@dimen/iv_large_icon"
+                android:layout_height="@dimen/iv_large_icon"
+                android:layout_marginTop="@dimen/iv_margin_small"
+                android:layout_marginRight="@dimen/iv_margin_small"
+                tools:src="@drawable/ic_launcher_background"
                 />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_margin_small"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/label_weight_unit"
+                    />
+
+            </FrameLayout>
 
         </LinearLayout>
 

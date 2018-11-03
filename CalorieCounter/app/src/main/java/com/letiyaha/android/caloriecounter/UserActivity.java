@@ -26,11 +26,21 @@ public class UserActivity extends AppCompatActivity {
 
     private static final String ICON_DOB = "https://cdn.pixabay.com/photo/2012/04/05/00/42/cake-25388__480.png";
 
+    private static final String ICON_HEIGHT = "https://images.pexels.com/photos/162500/measurement-millimeter-centimeter-meter-162500.jpeg?auto=compress&cs=tinysrgb&h=350";
+
+    private static final String ICON_WEIGHT = "https://images.pexels.com/photos/53404/scale-diet-fat-health-53404.jpeg?auto=compress&cs=tinysrgb&h=350";
+
     @BindView(R.id.iv_user_name)
     ImageView mIvUsername;
 
     @BindView(R.id.iv_dob)
     ImageView mIvDob;
+
+    @BindView(R.id.iv_height)
+    ImageView mIvHeight;
+
+    @BindView(R.id.iv_weight)
+    ImageView mIvWeight;
 
     @BindView(R.id.et_username)
     EditText mEtUsername;
@@ -58,6 +68,8 @@ public class UserActivity extends AppCompatActivity {
 
         Picasso.with(mContext).load(ICON_USER).into(mIvUsername);
         Picasso.with(mContext).load(ICON_DOB).into(mIvDob);
+        Picasso.with(mContext).load(ICON_HEIGHT).into(mIvHeight);
+        Picasso.with(mContext).load(ICON_WEIGHT).into(mIvWeight);
 
         mBtNext.setOnClickListener(new View.OnClickListener() {
             @Override

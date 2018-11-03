@@ -118,6 +118,7 @@ public class PetActivity extends AppCompatActivity {
 
                     // 3. Start PetDetail Activity.
                     Intent intentToStartPetDetailActivity = new Intent(mContext, PetDetailActivity.class);
+                    intentToStartPetDetailActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intentToStartPetDetailActivity);
                 }
             }

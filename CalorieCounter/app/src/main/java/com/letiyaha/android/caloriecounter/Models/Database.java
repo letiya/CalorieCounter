@@ -139,6 +139,14 @@ public class Database {
         });
     }
 
+    public void addPetProfileCallback(ValueEventListener valueEventListener) {
+        mPetProfileEndPoint.addValueEventListener(valueEventListener);
+    }
+
+    public void removePetProfileCallback(ValueEventListener valueEventListener) {
+        mPetProfileEndPoint.removeEventListener(valueEventListener);
+    }
+
     /**
      * To wait for database to return the data 'PetProfile'
      */

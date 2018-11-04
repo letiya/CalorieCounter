@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.letiyaha.android.caloriecounter.Models.Database;
 
@@ -38,9 +37,7 @@ public class MealDetailFragment extends Fragment implements MealDetailAdapter.Me
     Button mBtAdd2Plate;
 
     // Mandatory constructor for instantiating the fragment.
-    public MealDetailFragment() {
-
-    }
+    public MealDetailFragment() {}
 
     public void setClickedMeal(String clickedMeal) {
         mClickedMeal = clickedMeal;
@@ -97,11 +94,8 @@ public class MealDetailFragment extends Fragment implements MealDetailAdapter.Me
     public void onClick(String foodName) {
         if (mFoodClicked.containsKey(foodName)) {
             mFoodClicked.put(foodName, !mFoodClicked.get(foodName));
-            String isAdded = mFoodClicked.get(foodName) ? "added" : "removed";
-            Toast.makeText(mContext, foodName + " is " + isAdded, Toast.LENGTH_SHORT).show();
         } else {
             mFoodClicked.put(foodName, true);
-            Toast.makeText(mContext, foodName + " is added", Toast.LENGTH_SHORT).show();
         }
     }
 

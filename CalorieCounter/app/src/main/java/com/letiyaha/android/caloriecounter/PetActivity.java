@@ -1,7 +1,5 @@
 package com.letiyaha.android.caloriecounter;
 
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -23,8 +21,6 @@ public class PetActivity extends AppCompatActivity {
     private Context mContext;
     private ImageView mSelectedPet;
     private String mImageSrc;
-
-    private static final String IMAGE_PET = "https://cdn.pixabay.com/photo/2016/04/06/17/42/silhouette-1312357__480.png";
 
     private static final String IMAGE_PET1 = "https://cdn.pixabay.com/photo/2016/05/12/23/03/lamb-1388937__340.png";
     private static final String IMAGE_PET2 = "https://cdn.pixabay.com/photo/2016/04/01/08/29/animals-1298747__340.png";
@@ -62,7 +58,10 @@ public class PetActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
-        Picasso.with(mContext).load(IMAGE_PET).into(mIvPet);
+        // Default pet
+        mSelectedPet = mIvPet1;
+        mImageSrc = IMAGE_PET1;
+        Picasso.with(mContext).load(mImageSrc).into(mIvPet);
 
         Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet1);
 
@@ -71,7 +70,7 @@ public class PetActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mSelectedPet = mIvPet1;
                 mImageSrc = IMAGE_PET1;
-                Toast.makeText(mContext, PET1 + " is selected!", Toast.LENGTH_SHORT).show();
+                Picasso.with(mContext).load(mImageSrc).into(mIvPet);
             }
         });
 
@@ -82,7 +81,7 @@ public class PetActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mSelectedPet = mIvPet2;
                 mImageSrc = IMAGE_PET2;
-                Toast.makeText(mContext, PET2 + " is selected!", Toast.LENGTH_SHORT).show();
+                Picasso.with(mContext).load(mImageSrc).into(mIvPet);
             }
         });
 
@@ -93,7 +92,7 @@ public class PetActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mSelectedPet = mIvPet3;
                 mImageSrc = IMAGE_PET3;
-                Toast.makeText(mContext, PET3 + " is selected!", Toast.LENGTH_SHORT).show();
+                Picasso.with(mContext).load(mImageSrc).into(mIvPet);
             }
         });
 
@@ -110,16 +109,13 @@ public class PetActivity extends AppCompatActivity {
                     db.insertPetProfile(mEtPetname.getText().toString(), mImageSrc);
 
                     // 2. Update widget image
-                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
-                    int[] ids = appWidgetManager.getAppWidgetIds(
-                            new ComponentName(getApplicationContext().getPackageName(),
-                                    ".PetWidgetProvider"));
-                    PetWidgetRender.updateWidgetDisplays(mContext, appWidgetManager, ids);
+                    PetWidgetRender.updateWidgetDisplay(mContext, mEtPetname.getText().toString(), mImageSrc);
 
                     // 3. Start PetDetail Activity.
                     Intent intentToStartPetDetailActivity = new Intent(mContext, PetDetailActivity.class);
                     intentToStartPetDetailActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intentToStartPetDetailActivity);
+                    finish();
                 }
             }
         });

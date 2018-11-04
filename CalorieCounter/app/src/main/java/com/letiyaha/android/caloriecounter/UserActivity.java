@@ -89,6 +89,7 @@ public class UserActivity extends AppCompatActivity {
                     // 2. Go to PetActivity.
                     Intent intentToStartPetActivity = new Intent(mContext, PetActivity.class);
                     startActivity(intentToStartPetActivity);
+                    finish();
                 }
             }
         });

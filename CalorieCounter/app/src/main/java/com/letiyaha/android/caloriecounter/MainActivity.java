@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        mDb.addPetProfileCallback(mValueEventListener);
+        mDb.addPetProfileListener(mValueEventListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mDb.removePetProfileCallback(mValueEventListener);
+        mDb.removePetProfileListener(mValueEventListener);
         finish();
     }
 }

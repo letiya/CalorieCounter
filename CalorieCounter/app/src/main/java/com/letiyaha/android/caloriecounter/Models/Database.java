@@ -139,19 +139,19 @@ public class Database {
         });
     }
 
-    public void addPetProfileCallback(ValueEventListener valueEventListener) {
-        mPetProfileEndPoint.addValueEventListener(valueEventListener);
-    }
-
-    public void removePetProfileCallback(ValueEventListener valueEventListener) {
-        mPetProfileEndPoint.removeEventListener(valueEventListener);
-    }
-
     /**
      * To wait for database to return the data 'PetProfile'
      */
     public interface ReadPetProfileCallback {
         void onCallback(PetProfile petProfile);
+    }
+
+    public void addPetProfileListener(ValueEventListener valueEventListener) {
+        mPetProfileEndPoint.addValueEventListener(valueEventListener);
+    }
+
+    public void removePetProfileListener(ValueEventListener valueEventListener) {
+        mPetProfileEndPoint.removeEventListener(valueEventListener);
     }
 
     /**

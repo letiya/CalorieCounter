@@ -2,78 +2,73 @@ package com.letiyaha.android.caloriecounter;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.letiyaha.android.caloriecounter.Models.Database;
 import com.letiyaha.android.caloriecounter.Models.PetProfile;
 import com.squareup.picasso.Picasso;
 
 public class PetWidgetRender {
 
-    public PetWidgetRender() {
+    public PetWidgetRender() {}
 
-    }
+    private static final String TAG = PetWidgetRender.class.getSimpleName();
 
     private static final String ICON_NO_PET = "https://cdn.pixabay.com/photo/2016/11/16/17/27/question-mark-1829459__480.png";
 
-    public static void updateWidgetDisplay(final Context context, final RemoteViews views, AppWidgetManager appWidgetManager, final int appWidgetId) {
-        // Set up pet name/image for the widget.
-        Database db = Database.getInstance();
-        db.readPetProfile(new Database.ReadPetProfileCallback() {
+    public static void updateWidgetDisplayFromDatabase(final Context context, final BroadcastReceiver.PendingResult result) {
+        final Database db = Database.getInstance();
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
-            public void onCallback(PetProfile petProfile) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Set up pet name/image for the widget.
+                PetProfile petProfile = dataSnapshot.getValue(PetProfile.class);
                 String petName = petProfile.getPetName();
                 String petImage = petProfile.getPetImage();
+                updateWidgetDisplay(context, petName, petImage);
 
-                int[] appWidgetIds = {appWidgetId};
+                db.removePetProfileListener(this);
 
-                if (petName.length() > 0) {
-                    views.setTextViewText(R.id.widget_pet_name, petName);
-
-                    // Set up pet image for the widget.
-//                    views.setImageViewResource(R.id.widget_pet_image, R.drawable.ic_launcher_foreground);
-
-                    Picasso.with(context)
-                            .load(petImage)
-                            .into(views, R.id.widget_pet_image, appWidgetIds);
-
-                } else {
-                    views.setTextViewText(R.id.widget_pet_name, "");
-
-                    // Set up pet image for the widget.
-//                    views.setImageViewResource(R.id.widget_pet_image, R.drawable.ic_launcher_foreground);
-
-                    Picasso.with(context)
-                            .load(ICON_NO_PET)
-                            .into(views, R.id.widget_pet_image, appWidgetIds);
-
+                if (result != null) {
+                    result.finish();
                 }
             }
-        });
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        };
+        db.addPetProfileListener(valueEventListener);
     }
 
-    public static void updateWidgetDisplays(final Context context, AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
+    public static void updateWidgetDisplay(Context context, String petName, String petImage) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pet_widget);
-        for (int appWidgetId : appWidgetIds) {
-            updateWidgetDisplay(context, views, appWidgetManager, appWidgetId);
-        }
-    }
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(context, PetWidgetProvider.class));
 
-    public static void updateAppWidget(final Context context, AppWidgetManager appWidgetManager, final int appWidgetId) {
+        if (petName.length() > 0) {
+            views.setTextViewText(R.id.widget_pet_name, petName);
+            Picasso.with(context).load(petImage).into(views, R.id.widget_pet_image, ids);
+        } else {
+            views.setTextViewText(R.id.widget_pet_name, "");
+            Picasso.with(context).load(ICON_NO_PET).into(views, R.id.widget_pet_image, ids);
+        }
+
         // Create an Intent to launch PetDetailActivity when clicked
         Intent intent = new Intent(context, PetDetailActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-        // Construct the RemoteViews object
-        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pet_widget);
-
-        updateWidgetDisplay(context, views, appWidgetManager, appWidgetId);
-
         // Widgets allow click handlers to only launch pending intents
         views.setOnClickPendingIntent(R.id.widget_pet_image, pendingIntent);
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+        appWidgetManager.updateAppWidget(ids, views);
     }
-
 }

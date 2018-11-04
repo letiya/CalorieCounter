@@ -1,6 +1,7 @@
 package com.letiyaha.android.caloriecounter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +25,8 @@ public class MealDetailAdapter extends RecyclerView.Adapter<MealDetailAdapter.Me
     private Context mContext;
 
     private String mClickedMeal;
+
+    private Set<Integer> mFoodClicked = new HashSet<>();
 
     private final MealAdapterOnClickHandler mClickHandler;
 
@@ -149,6 +154,15 @@ public class MealDetailAdapter extends RecyclerView.Adapter<MealDetailAdapter.Me
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
+
+            if (mFoodClicked.contains(adapterPosition)) {
+                v.setBackgroundColor(Color.TRANSPARENT);
+                mFoodClicked.remove(adapterPosition);
+            } else {
+                v.setBackgroundColor(mContext.getResources().getColor(R.color.lightGray));
+                mFoodClicked.add(adapterPosition);
+            }
+
             String foodName = mFoodName.get(adapterPosition);
             mClickHandler.onClick(foodName);
         }

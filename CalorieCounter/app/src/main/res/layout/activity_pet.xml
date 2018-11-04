@@ -53,8 +53,9 @@
                 android:id="@+id/et_petname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_name_pet"
                 android:layout_marginTop="@dimen/iv_margin_small"
+                android:singleLine="true"
+                android:hint="@string/hint_name_pet"
                 />
 
         </LinearLayout>

@@ -64,6 +64,7 @@ public class PetActivity extends AppCompatActivity {
         Picasso.with(mContext).load(mImageSrc).into(mIvPet);
 
         Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet1);
+        mIvPet1.setContentDescription(PET1);
 
         mIvPet1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +76,7 @@ public class PetActivity extends AppCompatActivity {
         });
 
         Picasso.with(mContext).load(IMAGE_PET2).into(mIvPet2);
+        mIvPet2.setContentDescription(PET2);
 
         mIvPet2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +88,7 @@ public class PetActivity extends AppCompatActivity {
         });
 
         Picasso.with(mContext).load(IMAGE_PET3).into(mIvPet3);
+        mIvPet3.setContentDescription(PET3);
 
         mIvPet3.setOnClickListener(new View.OnClickListener() {
             @Override

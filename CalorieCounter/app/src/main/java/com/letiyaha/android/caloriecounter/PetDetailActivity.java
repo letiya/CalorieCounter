@@ -73,7 +73,7 @@ public class PetDetailActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // 1. Set up pet name/image.
                 PetProfile petProfile = dataSnapshot.getValue(PetProfile.class);
-                mTvPetname.setText(" " + petProfile.getPetName());
+                mTvPetname.setText(petProfile.getPetName());
                 if (petProfile.getPetImage().equals(IMAGE_PET1)) {
                     Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet);
                 } else if (petProfile.getPetImage().equals(IMAGE_PET2)) {

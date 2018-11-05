@@ -29,7 +29,9 @@
         android:textSize="@dimen/tv_content_size"
         android:layout_marginTop="@dimen/tv_margin_small"
         android:layout_marginLeft="@dimen/tv_margin_small"
+        android:layout_marginStart="@dimen/tv_margin_small"
         android:layout_marginRight="@dimen/tv_margin_small"
+        android:layout_marginEnd="@dimen/tv_margin_small"
         android:layout_marginBottom="@dimen/tv_margin_small"
         />
 
@@ -43,7 +45,9 @@
         android:textSize="@dimen/tv_content_size"
         android:layout_marginTop="@dimen/tv_margin_small"
         android:layout_marginLeft="@dimen/tv_margin_small"
+        android:layout_marginStart="@dimen/tv_margin_small"
         android:layout_marginRight="@dimen/tv_margin_small"
+        android:layout_marginEnd="@dimen/tv_margin_small"
         android:layout_marginBottom="@dimen/tv_margin_small"
         />
 

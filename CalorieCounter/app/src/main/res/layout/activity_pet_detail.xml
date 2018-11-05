@@ -35,15 +35,10 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/ll_margin_small"
             android:layout_marginLeft="@dimen/ll_margin_small"
+            android:layout_marginStart="@dimen/ll_margin_small"
             android:layout_marginRight="@dimen/ll_margin_small"
+            android:layout_marginEnd="@dimen/ll_margin_small"
             >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_name_detail_pet"
-                android:textSize="@dimen/tv_content_size"
-                />
 
             <TextView
                 android:id="@+id/tv_pet_name"
@@ -60,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginLeft="@dimen/iv_margin_small"
+            android:layout_marginStart="@dimen/iv_margin_small"
             android:layout_gravity="center"
             tools:src="@drawable/ic_launcher_foreground"
             />
@@ -71,7 +67,9 @@
             android:text="@string/label_feed_me"
             android:layout_marginTop="@dimen/bt_margin_small"
             android:layout_marginLeft="@dimen/bt_margin_small"
+            android:layout_marginStart="@dimen/bt_margin_small"
             android:layout_marginRight="@dimen/bt_margin_small"
+            android:layout_marginEnd="@dimen/bt_margin_small"
             />
 
         <Button
@@ -81,7 +79,9 @@
             android:text="@string/label_health_cond"
             android:layout_marginTop="@dimen/bt_margin_small"
             android:layout_marginLeft="@dimen/bt_margin_small"
+            android:layout_marginStart="@dimen/bt_margin_small"
             android:layout_marginRight="@dimen/bt_margin_small"
+            android:layout_marginEnd="@dimen/bt_margin_small"
             />
 
     </LinearLayout>

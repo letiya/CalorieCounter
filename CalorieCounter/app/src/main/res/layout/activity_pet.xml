@@ -37,7 +37,9 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/ll_margin_small"
             android:layout_marginLeft="@dimen/ll_margin_small"
+            android:layout_marginStart="@dimen/ll_margin_small"
             android:layout_marginRight="@dimen/ll_margin_small"
+            android:layout_marginEnd="@dimen/ll_margin_small"
             >
 
             <ImageView
@@ -45,6 +47,7 @@
                 android:layout_width="@dimen/iv_large_icon"
                 android:layout_height="@dimen/iv_large_icon"
                 android:layout_marginRight="@dimen/iv_margin_small"
+                android:layout_marginEnd="@dimen/iv_margin_small"
                 android:layout_marginTop="@dimen/iv_margin_small"
                 tools:src="@drawable/ic_launcher_background"
                 />
@@ -66,7 +69,9 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/ll_margin_small"
             android:layout_marginLeft="@dimen/ll_margin_small"
+            android:layout_marginStart="@dimen/ll_margin_small"
             android:layout_marginRight="@dimen/ll_margin_small"
+            android:layout_marginEnd="@dimen/ll_margin_small"
             >
 
             <ImageView
@@ -75,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:layout_marginLeft="@dimen/iv_margin_small"
+                android:layout_marginStart="@dimen/iv_margin_small"
                 tools:src="@drawable/ic_launcher_foreground"
                 />
 
@@ -84,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:layout_marginLeft="@dimen/iv_margin_small"
+                android:layout_marginStart="@dimen/iv_margin_small"
                 tools:src="@drawable/ic_launcher_foreground"
                 />
 
@@ -95,7 +102,9 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/ll_margin_small"
             android:layout_marginLeft="@dimen/ll_margin_small"
+            android:layout_marginStart="@dimen/ll_margin_small"
             android:layout_marginRight="@dimen/ll_margin_small"
+            android:layout_marginEnd="@dimen/ll_margin_small"
             >
 
             <ImageView
@@ -104,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:layout_marginLeft="@dimen/iv_margin_small"
+                android:layout_marginStart="@dimen/iv_margin_small"
                 tools:src="@drawable/ic_launcher_foreground"
                 />
 
@@ -118,6 +128,7 @@
         android:layout_margin="@dimen/bt_margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/label_next"
         />
 

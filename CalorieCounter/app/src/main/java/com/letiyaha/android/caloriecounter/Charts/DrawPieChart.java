@@ -16,6 +16,16 @@ public class DrawPieChart {
 
     private PieChart mPieChart;
 
+    private static final String BREAKFAST_CAL = "breakfastCal";
+    private static final String LUNCH_CAL = "lunchCal";
+    private static final String DINNER_CAL = "dinnerCal";
+    private static final String SNACK_CAL = "snackCal";
+
+    private static final String LABEL_BREAKFAST = "Breakfast";
+    private static final String LABEL_LUNCH = "Lunch";
+    private static final String LABEL_DINNER = "Dinner";
+    private static final String LABEL_SNACK = "Snack";
+
     public DrawPieChart(PieChart pieChart, HashMap<String, Integer> dataValueList, String chartName) {
         mPieChart = pieChart;
 
@@ -40,17 +50,17 @@ public class DrawPieChart {
         // Get chart data
         List<PieEntry> entries = new ArrayList<>();
 
-        if (dataValueList.get("breakfastCal") != null && dataValueList.get("breakfastCal") != 0) {
-            entries.add(new PieEntry(dataValueList.get("breakfastCal"), "Breakfast"));
+        if (dataValueList.get(BREAKFAST_CAL) != null && dataValueList.get(BREAKFAST_CAL) != 0) {
+            entries.add(new PieEntry(dataValueList.get(BREAKFAST_CAL), LABEL_BREAKFAST));
         }
-        if (dataValueList.get("lunchCal") != null && dataValueList.get("lunchCal") != 0) {
-            entries.add(new PieEntry(dataValueList.get("lunchCal"), "Lunch"));
+        if (dataValueList.get(LUNCH_CAL) != null && dataValueList.get(LUNCH_CAL) != 0) {
+            entries.add(new PieEntry(dataValueList.get(LUNCH_CAL), LABEL_LUNCH));
         }
-        if (dataValueList.get("dinnerCal") != null && dataValueList.get("dinnerCal") != 0) {
-            entries.add(new PieEntry(dataValueList.get("dinnerCal"), "Dinner"));
+        if (dataValueList.get(DINNER_CAL) != null && dataValueList.get(DINNER_CAL) != 0) {
+            entries.add(new PieEntry(dataValueList.get(DINNER_CAL), LABEL_DINNER));
         }
-        if (dataValueList.get("snackCal") != null && dataValueList.get("snackCal") != 0) {
-            entries.add(new PieEntry(dataValueList.get("snackCal"), "Snack"));
+        if (dataValueList.get(SNACK_CAL) != null && dataValueList.get(SNACK_CAL) != 0) {
+            entries.add(new PieEntry(dataValueList.get(SNACK_CAL), LABEL_SNACK));
         }
 
         // Get Pie data

@@ -41,6 +41,16 @@ public class HealthActivity extends AppCompatActivity {
 
     private static final String TAG = HealthActivity.class.getSimpleName();
 
+    private static final String BREAKFAST_CAL = "breakfastCal";
+    private static final String LUNCH_CAL = "lunchCal";
+    private static final String DINNER_CAL = "dinnerCal";
+    private static final String SNACK_CAL = "snackCal";
+
+    private static final String LABEL_BREAKFAST = "Breakfast";
+    private static final String LABEL_LUNCH = "Lunch";
+    private static final String LABEL_DINNER = "Dinner";
+    private static final String LABEL_SNACK = "Snack";
+
     @BindView(R.id.pc_day)
     PieChart mPieChart;
 
@@ -163,17 +173,17 @@ public class HealthActivity extends AppCompatActivity {
                 float dinnerCal = 0;
                 float snackCal = 0;
 
-                if (mealCal.get("breakfastCal") != null) {
-                    breakfastCal = (float) mealCal.get("breakfastCal");
+                if (mealCal.get(BREAKFAST_CAL) != null) {
+                    breakfastCal = (float) mealCal.get(BREAKFAST_CAL);
                 }
-                if (mealCal.get("lunchCal") != null) {
-                    lunchCal = (float) mealCal.get("lunchCal");
+                if (mealCal.get(LUNCH_CAL) != null) {
+                    lunchCal = (float) mealCal.get(LUNCH_CAL);
                 }
-                if (mealCal.get("dinnerCal") != null) {
-                    dinnerCal = (float) mealCal.get("dinnerCal");
+                if (mealCal.get(DINNER_CAL) != null) {
+                    dinnerCal = (float) mealCal.get(DINNER_CAL);
                 }
-                if (mealCal.get("snackCal") != null) {
-                    snackCal = (float) mealCal.get("snackCal");
+                if (mealCal.get(SNACK_CAL) != null) {
+                    snackCal = (float) mealCal.get(SNACK_CAL);
                 }
 
                 xAxisValues.add(date.substring(4));
@@ -183,10 +193,10 @@ public class HealthActivity extends AppCompatActivity {
                 ySnackVal.add(snackCal);
             }
         }
-        dataLists.put("Breakfast", yBreakfastVal);
-        dataLists.put("Lunch", yLunchVal);
-        dataLists.put("Dinner", yDinnerVal);
-        dataLists.put("Snack", ySnackVal);
+        dataLists.put(LABEL_BREAKFAST, yBreakfastVal);
+        dataLists.put(LABEL_LUNCH, yLunchVal);
+        dataLists.put(LABEL_DINNER, yDinnerVal);
+        dataLists.put(LABEL_SNACK, ySnackVal);
 
         if (xAxisValues.size() != 0) {
             DrawBarChart drawBarChart = new DrawBarChart(mBarChart, xAxisValues, dataLists, colors);

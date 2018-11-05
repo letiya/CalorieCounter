@@ -14,14 +14,9 @@
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
+        app:title="@string/label_my_profile"
+        app:titleTextAppearance="@style/ToolbarText"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_my_profile"
-            style="@style/ToolbarText"
-            />
 
     </android.support.v7.widget.Toolbar>
 

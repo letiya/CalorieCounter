@@ -29,25 +29,15 @@
         android:orientation="vertical"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_pet_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/ll_margin_small"
-            android:layout_marginLeft="@dimen/ll_margin_small"
-            android:layout_marginStart="@dimen/ll_margin_small"
-            android:layout_marginRight="@dimen/ll_margin_small"
-            android:layout_marginEnd="@dimen/ll_margin_small"
-            >
-
-            <TextView
-                android:id="@+id/tv_pet_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/tv_content_size"
-                />
-
-        </LinearLayout>
+            android:layout_margin="@dimen/tv_margin_small"
+            android:layout_gravity="center"
+            android:textSize="@dimen/tv_content_size"
+            tools:text="Pet name"
+            />
 
         <ImageView
             android:id="@+id/iv_pet"

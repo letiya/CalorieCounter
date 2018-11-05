@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -101,23 +102,41 @@ public class UpdateProfile extends AppCompatActivity {
         mBtFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean updateSucceed = true;
                 // 1. Update data in db
                 if (mEtUsername.getText().toString().length() != 0) {
                     mDb.updateProfile("userName", mEtUsername.getText().toString());
                 }
-                if (mEtDob.getText().toString().length() != 0 && Util.isDateValid(mEtDob.getText().toString(), "yyyy/MM/dd")) {
-                    mDb.updateProfile("dateOfBirth", mEtDob.getText().toString());
+                if (mEtDob.getText().toString().length() != 0) {
+                    if (Util.isDateValid(mEtDob.getText().toString(), "yyyy/MM/dd")) {
+                        mDb.updateProfile("dateOfBirth", mEtDob.getText().toString());
+                    } else {
+                        updateSucceed = false;
+                        Toast.makeText(mContext, "Date of birth format is incorrect!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                if (mEtHeight.getText().toString().length() != 0 && Util.isNumber(mEtHeight.getText().toString())) {
-                    mDb.updateProfile("height", mEtHeight.getText().toString());
+                if (mEtHeight.getText().toString().length() != 0) {
+                    if (Util.isNumber(mEtHeight.getText().toString())) {
+                        mDb.updateProfile("height", mEtHeight.getText().toString());
+                    } else {
+                        updateSucceed = false;
+                        Toast.makeText(mContext, "Entered height is not a number!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                if (mEtWeight.getText().toString().length() != 0 && Util.isNumber(mEtWeight.getText().toString())) {
-                    mDb.updateProfile("weight", mEtWeight.getText().toString());
+                if (mEtWeight.getText().toString().length() != 0) {
+                    if (Util.isNumber(mEtWeight.getText().toString())) {
+                        mDb.updateProfile("weight", mEtWeight.getText().toString());
+                    } else {
+                        updateSucceed = false;
+                        Toast.makeText(mContext, "Entered weight is not a number!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                // 2. Go back to PetDetailActivity.
-                Intent intentToStartPetDetailActivity = new Intent(mContext, PetDetailActivity.class);
-                intentToStartPetDetailActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intentToStartPetDetailActivity);
+                if (updateSucceed) {
+                    // 2. Go back to PetDetailActivity.
+                    Intent intentToStartPetDetailActivity = new Intent(mContext, PetDetailActivity.class);
+                    intentToStartPetDetailActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intentToStartPetDetailActivity);
+                }
             }
         });
     }

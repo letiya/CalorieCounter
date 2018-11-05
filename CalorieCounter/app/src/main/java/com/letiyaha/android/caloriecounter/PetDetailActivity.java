@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.letiyaha.android.caloriecounter.Models.Database;
 import com.letiyaha.android.caloriecounter.Models.PetProfile;
 import com.squareup.picasso.Picasso;
@@ -25,6 +29,10 @@ import butterknife.ButterKnife;
 public class PetDetailActivity extends AppCompatActivity {
 
     private Context mContext;
+    private Database mDb;
+    private ValueEventListener mValueEventListener;
+
+    private static final String TAG = PetDetailActivity.class.getSimpleName();
 
     private static final String IMAGE_PET1 = "https://cdn.pixabay.com/photo/2016/05/12/23/03/lamb-1388937__340.png";
     private static final String IMAGE_PET2 = "https://cdn.pixabay.com/photo/2016/04/01/08/29/animals-1298747__340.png";
@@ -58,11 +66,13 @@ public class PetDetailActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
 
-        // 1. Set up pet name/image.
-        Database db = Database.getInstance();
-        db.readPetProfile(new Database.ReadPetProfileCallback() {
+        mDb = Database.getInstance();
+
+        mValueEventListener = new ValueEventListener() {
             @Override
-            public void onCallback(PetProfile petProfile) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // 1. Set up pet name/image.
+                PetProfile petProfile = dataSnapshot.getValue(PetProfile.class);
                 mTvPetname.setText(" " + petProfile.getPetName());
                 if (petProfile.getPetImage().equals(IMAGE_PET1)) {
                     Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet);
@@ -72,7 +82,12 @@ public class PetDetailActivity extends AppCompatActivity {
                     Picasso.with(mContext).load(IMAGE_PET3).into(mIvPet);
                 }
             }
-        });
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        };
 
         // 2. Set up button 'Feed Me'
         mBtFeedMe.setOnClickListener(new View.OnClickListener() {
@@ -121,5 +136,17 @@ public class PetDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mDb.addPetProfileListener(mValueEventListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mDb.removePetProfileListener(mValueEventListener);
     }
 }

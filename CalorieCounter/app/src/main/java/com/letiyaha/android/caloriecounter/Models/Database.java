@@ -1,21 +1,10 @@
 package com.letiyaha.android.caloriecounter.Models;
 
-import android.util.Log;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-
 public class Database {
-
-    private static final String TAG = Database.class.getSimpleName();
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mBaseRef;
@@ -56,7 +45,7 @@ public class Database {
     }
 
     /**
-     * Insert data to Profile node
+     * Insert data to Profile node.
      * @param userName
      * @param dateOfBirth
      * @param height
@@ -69,7 +58,7 @@ public class Database {
     }
 
     /**
-     * Update data in Profile node
+     * Update data in Profile node.
      * @param key - userName, dateOfBirth, height, weight
      * @param value - Amy, 19980101, 180, 60
      */
@@ -78,32 +67,23 @@ public class Database {
     }
 
     /**
-     * Read all data in Profile node
+     * Add a valueEventListener to read all data in Profile node.
+     * @param valueEventListener
      */
-    public void readProfile(final ReadProfileCallback readProfileCallback) {
-        mProfileEndPoint.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Profile profile = dataSnapshot.getValue(Profile.class);
-                readProfileCallback.onCallback(profile);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
+    public void addProfileListener(ValueEventListener valueEventListener) {
+        mProfileEndPoint.addValueEventListener(valueEventListener);
     }
 
     /**
-     * To wait for database to return the data 'Profile'
+     * Remove unused valueEventListener.
+     * @param valueEventListener
      */
-    public interface ReadProfileCallback {
-        void onCallback(Profile profile);
+    public void removeProfileListener(ValueEventListener valueEventListener) {
+        mProfileEndPoint.removeEventListener(valueEventListener);
     }
 
     /**
-     * Insert data to PetProfile node
+     * Insert data to PetProfile node.
      * @param petName
      * @param petImage
      */
@@ -113,7 +93,7 @@ public class Database {
     }
 
     /**
-     * Update data in PetProfile node
+     * Update data in PetProfile node.
      * @param key
      * @param value
      */
@@ -122,159 +102,103 @@ public class Database {
     }
 
     /**
-     * Read all data in PetProfile node
+     * Add a valueEventListener to read all data in PetProfile node.
+     * @param valueEventListener
      */
-    public void readPetProfile(final ReadPetProfileCallback readPetProfileCallback) {
-        mPetProfileEndPoint.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                PetProfile petProfile = dataSnapshot.getValue(PetProfile.class);
-                readPetProfileCallback.onCallback(petProfile);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
-    }
-
-    /**
-     * To wait for database to return the data 'PetProfile'
-     */
-    public interface ReadPetProfileCallback {
-        void onCallback(PetProfile petProfile);
-    }
-
     public void addPetProfileListener(ValueEventListener valueEventListener) {
         mPetProfileEndPoint.addValueEventListener(valueEventListener);
     }
 
+    /**
+     * Remove unused valueEventListener.
+     * @param valueEventListener
+     */
     public void removePetProfileListener(ValueEventListener valueEventListener) {
         mPetProfileEndPoint.removeEventListener(valueEventListener);
     }
 
     /**
-     * Read all data key-value pair by key-value pair in databaseReference node
-     * @param databaseReference
+     * Add a valueEventListener to read all data by key-value pair in mBreakfastEndPoint node.
+     * @param valueEventListener
      */
-    private void selectFood(DatabaseReference databaseReference, final SelectFoodCallback selectFoodCallback) {
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String, String> foodInfo = new HashMap<String, String>();
-                // Go through all key-value pairs.
-                for (DataSnapshot ds : dataSnapshot.getChildren() ){
-                    String foodName = ds.getKey().toString(); // Get all keys alphabetically
-                    String foodImage = ds.getValue().toString(); // Get all values alphabetically
-                    foodInfo.put(foodName, foodImage);
-                }
-                selectFoodCallback.onCallback(foodInfo);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
+    public void addBreakfastListener(ValueEventListener valueEventListener) {
+        mBreakfastEndPoint.addValueEventListener(valueEventListener);
     }
 
     /**
-     * To wait for database to return the data 'foodInfo'
+     * Remove unused valueEventListener.
+     * @param valueEventListener
      */
-    public interface SelectFoodCallback {
-        void onCallback(HashMap<String, String> foodInfo);
+    public void removeBreakfastListener(ValueEventListener valueEventListener) {
+        mBreakfastEndPoint.removeEventListener(valueEventListener);
     }
 
     /**
-     * Read all data in Breakfast node
+     * Add a valueEventListener to read all data by key-value pair in mLunchEndPoint node.
+     * @param valueEventListener
      */
-    public void selectBreakfast(SelectFoodCallback selectFoodCallback) {
-        selectFood(mBreakfastEndPoint, selectFoodCallback);
+    public void addLunchListener(ValueEventListener valueEventListener) {
+        mLunchEndPoint.addValueEventListener(valueEventListener);
     }
 
     /**
-     * Read all data in Lunch node
+     * Remove unused valueEventListener.
+     * @param valueEventListener
      */
-    public void selectLunch(SelectFoodCallback selectFoodCallback) {
-        selectFood(mLunchEndPoint, selectFoodCallback);
+    public void removeLunchListener(ValueEventListener valueEventListener) {
+        mLunchEndPoint.removeEventListener(valueEventListener);
     }
 
     /**
-     * Read all data in Dinner node
+     * Add a valueEventListener to read all data by key-value pair in mDinnerEndPoint node.
+     * @param valueEventListener
      */
-    public void selectDinner(SelectFoodCallback selectFoodCallback) {
-        selectFood(mDinnerEndPoint, selectFoodCallback);
+    public void addDinnerListener(ValueEventListener valueEventListener) {
+        mDinnerEndPoint.addValueEventListener(valueEventListener);
     }
 
     /**
-     * Read all data in Snack node
+     * Remove unused valueEventListener.
+     * @param valueEventListener
      */
-    public void selectSnack(SelectFoodCallback selectFoodCallback) {
-        selectFood(mSnackEndPoint, selectFoodCallback);
+    public void removeDinnerListener(ValueEventListener valueEventListener) {
+        mDinnerEndPoint.removeEventListener(valueEventListener);
     }
 
     /**
-     * Read calories of 'foodName' in FoodCal node
-     * @param foodName - ex: apple
+     * Add a valueEventListener to read all data by key-value pair in mSnackEndPoint node.
+     * @param valueEventListener
      */
-    public void selectFoodCal(final String foodName, final SelectFoodCalCallback selectFoodCalCallback) {
-        mFoodCalEndPoint.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String foodCal = dataSnapshot.child(foodName).getValue().toString();
-                selectFoodCalCallback.onCallback(foodCal);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
+    public void addSnackListener(ValueEventListener valueEventListener) {
+        mSnackEndPoint.addValueEventListener(valueEventListener);
     }
 
     /**
-     * To wait for database to return the data 'foodCal'
+     * Remove unused valueEventListener.
+     * @param valueEventListener
      */
-    public interface SelectFoodCalCallback {
-        void onCallback(String foodCal);
+    public void removeSnackListener(ValueEventListener valueEventListener) {
+        mSnackEndPoint.removeEventListener(valueEventListener);
     }
 
     /**
-     * Read calories of clicked food in FoodCal node
-     * @param foodClicked
-     * @param selectClickedFoodCalCallback
+     * Add a valueEventListener to read calories of clicked food in FoodCal node.
+     * @param valueEventListener
      */
-    public void seletClickedFoodCal(final HashMap<String, Boolean> foodClicked, final SelectClickedFoodCalCallback selectClickedFoodCalCallback) {
-        mFoodCalEndPoint.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int totalCal = 0;
-                for (String foodName : foodClicked.keySet()) {
-                    if (foodClicked.get(foodName)) {
-                        String foodCal = dataSnapshot.child(foodName).getValue().toString();
-                        totalCal += Integer.parseInt(foodCal);
-                    }
-                }
-                selectClickedFoodCalCallback.onCallback(totalCal);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
+    public void addClickedFoodCalListener(ValueEventListener valueEventListener) {
+        mFoodCalEndPoint.addValueEventListener(valueEventListener);
     }
 
     /**
-     * To wait for database to return the data 'totalCal'
+     * Remove unused valueEventListener.
+     * @param valueEventListener
      */
-    public interface SelectClickedFoodCalCallback {
-        void onCallback(int totalCal);
+    public void removeClickedFoodCalListener(ValueEventListener valueEventListener) {
+        mFoodCalEndPoint.removeEventListener(valueEventListener);
     }
 
     /**
-     * Update data in CalorieLog node
+     * Update data in CalorieLog node.
      * @param datetime ex: 20180101
      * @param key ex: Breakfast, Lunch, Dinner, Snack
      * @param value ex: 500, 600
@@ -284,117 +208,53 @@ public class Database {
     }
 
     /**
-     * Select calorie intake of this 'date'
-     * @param selectCalorieLogCallback
+     * Add a valueEventListener to read calorie intake of this 'date'.
+     * @param valueEventListener
      * @param date - ex:20181010
      */
-    public void selectCalorieLog(final SelectCalorieLogCallback selectCalorieLogCallback, String date) {
+    public void addDateCalorieLogListener(ValueEventListener valueEventListener, String date) {
         DatabaseReference calorieDateEndPoint = mCalorieLogEndPoint.child(date);
-        calorieDateEndPoint.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String, String> calInfo = new HashMap<String, String>();
-                // Go through all key-value pairs.
-                for (DataSnapshot ds : dataSnapshot.getChildren() ){
-                    String meal = ds.getKey().toString(); // Get all keys alphabetically
-                    String cal = ds.getValue().toString(); // Get all values alphabetically
-                    calInfo.put(meal, cal);
-                }
-                selectCalorieLogCallback.onCallback(calInfo);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
+        calorieDateEndPoint.addValueEventListener(valueEventListener);
     }
 
     /**
-     * To wait for database to return the data 'calInfo'
+     * Remove unused valueEventListener.
+     * @param valueEventListener
      */
-    public interface SelectCalorieLogCallback {
-        void onCallback(HashMap<String, String> calInfo);
+    public void removeDateCalorieLogListener(ValueEventListener valueEventListener, String date) {
+        DatabaseReference calorieDateEndPoint = mCalorieLogEndPoint.child(date);
+        calorieDateEndPoint.removeEventListener(valueEventListener);
     }
 
     /**
-     * Select calorie intake of a week before now
-     * @param selectWeekCalorieLogCallback
+     * Add a valueEventListener to read calorie intake of a week before now.
+     * @param valueEventListener
      */
-    public void selectWeekCalorieLog(final SelectWeekCalorieLogCallback selectWeekCalorieLogCallback) {
-        mCalorieLogEndPoint.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String, HashMap<String, Integer>> weekDateCals = new HashMap<String, HashMap<String, Integer>>();
-                for (int i = 0; i < 7; i++) {
-                    HashMap<String, Integer> mealCals = new HashMap<>();
-
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.DATE, -i);
-                    Date date = cal.getTime();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                    final String dateString = sdf.format(date);
-
-                    for (DataSnapshot ds : dataSnapshot.child(dateString).getChildren()) {
-                        String key = ds.getKey().toString(); // meal
-                        String value = ds.getValue().toString(); // calorie
-                        mealCals.put(key, Integer.parseInt(value));
-                    }
-                    weekDateCals.put(dateString, mealCals);
-                }
-                selectWeekCalorieLogCallback.onCallback(weekDateCals);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
+    public void addWeekCalorieLogListener(ValueEventListener valueEventListener) {
+        mCalorieLogEndPoint.addValueEventListener(valueEventListener);
     }
 
     /**
-     * To wait for database to return the data 'weekDateCals'
+     * Remove unused valueEventListener.
+     * @param valueEventListener
      */
-    public interface SelectWeekCalorieLogCallback {
-        void onCallback(HashMap<String, HashMap<String, Integer>> weekDateCals);
+    public void removeWeekCalorieLogListener(ValueEventListener valueEventListener) {
+        mCalorieLogEndPoint.removeEventListener(valueEventListener);
     }
 
     /**
-     * Select calorie intake of a month before now
-     * @param selectMonthCalorieLogCallback
+     * Add a valueEventListener to read calorie intake of a month before now.
+     * @param valueEventListener
      */
-    public void selectMonthCalorieLog(final SelectMonthCalorieLogCallback selectMonthCalorieLogCallback) {
-        mCalorieLogEndPoint.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String, Integer> monthDateCals = new HashMap<>();
-                for (int i = 0; i < 30; i++) {
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.DATE, -i);
-                    Date date = cal.getTime();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                    final String dateString = sdf.format(date);
-
-                    int cals = 0;
-                    for (DataSnapshot ds : dataSnapshot.child(dateString).getChildren()) {
-                        cals += Integer.parseInt(ds.getValue().toString()); // calorie
-                    }
-                    monthDateCals.put(dateString, cals);
-                }
-                selectMonthCalorieLogCallback.onCallback(monthDateCals);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
+    public void addMonthCalorieLogListener(ValueEventListener valueEventListener) {
+        mCalorieLogEndPoint.addValueEventListener(valueEventListener);
     }
 
     /**
-     * To wait for database to return the data 'monthDateCals'
+     * Remove unused valueEventListener.
+     * @param valueEventListener
      */
-    public interface SelectMonthCalorieLogCallback {
-        void onCallback(HashMap<String, Integer> monthDateCals);
+    public void removeMonthCalorieLogListener(ValueEventListener valueEventListener) {
+        mCalorieLogEndPoint.removeEventListener(valueEventListener);
     }
 }

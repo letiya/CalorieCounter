@@ -2,6 +2,7 @@ package com.letiyaha.android.caloriecounter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v7.widget.RecyclerView;
@@ -9,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.letiyaha.android.caloriecounter.Models.Database;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +26,7 @@ import butterknife.ButterKnife;
 public class MealDetailAdapter extends RecyclerView.Adapter<MealDetailAdapter.MealDetailAdapterViewHolder> {
 
     private Context mContext;
+    private Database mDb;
 
     private String mClickedMeal;
 
@@ -32,6 +36,8 @@ public class MealDetailAdapter extends RecyclerView.Adapter<MealDetailAdapter.Me
 
     private ArrayList<String> mFoodName = new ArrayList<String>();
     private ArrayList<String> mFoodImagePath = new ArrayList<String>();
+
+    private static final String TAG = MealDetailAdapter.class.getSimpleName();
 
     private static final String BREAKFAST = "Breakfast";
     private static final String LUNCH = "Lunch";
@@ -65,66 +71,110 @@ public class MealDetailAdapter extends RecyclerView.Adapter<MealDetailAdapter.Me
     }
 
     public void setFoodData(String clickedMeal) {
-        Database db = Database.getInstance();
+        mDb = Database.getInstance();
         switch (clickedMeal) {
             case BREAKFAST:
-                db.selectBreakfast(new Database.SelectFoodCallback() {
+                ValueEventListener breakfastValueEventListener = new ValueEventListener() {
                     @Override
-                    public void onCallback(HashMap<String, String> foodInfo) {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
                         int counter = 0;
-                        for (String key : foodInfo.keySet()) {
-                            mFoodName.add(counter, key);
-                            mFoodImagePath.add(counter, foodInfo.get(key));
+                        // Go through all key-value pairs.
+                        for (DataSnapshot ds : dataSnapshot.getChildren() ){
+                            String foodName = ds.getKey().toString(); // Get all keys alphabetically
+                            String foodImage = ds.getValue().toString(); // Get all values alphabetically
+
+                            mFoodName.add(counter, foodName);
+                            mFoodImagePath.add(counter, foodImage);
                             counter++;
                         }
                         notifyDataSetChanged();
+                        mDb.removeBreakfastListener(this);
                     }
-                });
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "Failed to read value.", databaseError.toException());
+                    }
+                };
+                mDb.addBreakfastListener(breakfastValueEventListener);
                 break;
 
             case LUNCH:
-                db.selectLunch(new Database.SelectFoodCallback() {
+                ValueEventListener lunchValueEventListener = new ValueEventListener() {
                     @Override
-                    public void onCallback(HashMap<String, String> foodInfo) {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
                         int counter = 0;
-                        for (String key : foodInfo.keySet()) {
-                            mFoodName.add(counter, key);
-                            mFoodImagePath.add(counter, foodInfo.get(key));
+                        // Go through all key-value pairs.
+                        for (DataSnapshot ds : dataSnapshot.getChildren() ){
+                            String foodName = ds.getKey().toString(); // Get all keys alphabetically
+                            String foodImage = ds.getValue().toString(); // Get all values alphabetically
+
+                            mFoodName.add(counter, foodName);
+                            mFoodImagePath.add(counter, foodImage);
                             counter++;
                         }
                         notifyDataSetChanged();
+                        mDb.removeLunchListener(this);
                     }
-                });
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "Failed to read value.", databaseError.toException());
+                    }
+                };
+                mDb.addLunchListener(lunchValueEventListener);
                 break;
 
             case DINNER:
-                db.selectDinner(new Database.SelectFoodCallback() {
+                ValueEventListener dinnerValueEventListener = new ValueEventListener() {
                     @Override
-                    public void onCallback(HashMap<String, String> foodInfo) {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
                         int counter = 0;
-                        for (String key : foodInfo.keySet()) {
-                            mFoodName.add(counter, key);
-                            mFoodImagePath.add(counter, foodInfo.get(key));
+                        // Go through all key-value pairs.
+                        for (DataSnapshot ds : dataSnapshot.getChildren() ){
+                            String foodName = ds.getKey().toString(); // Get all keys alphabetically
+                            String foodImage = ds.getValue().toString(); // Get all values alphabetically
+
+                            mFoodName.add(counter, foodName);
+                            mFoodImagePath.add(counter, foodImage);
                             counter++;
                         }
                         notifyDataSetChanged();
+                        mDb.removeDinnerListener(this);
                     }
-                });
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "Failed to read value.", databaseError.toException());
+                    }
+                };
+                mDb.addDinnerListener(dinnerValueEventListener);
                 break;
 
             case SNACK:
-                db.selectSnack(new Database.SelectFoodCallback() {
+                ValueEventListener snackValueEventListener = new ValueEventListener() {
                     @Override
-                    public void onCallback(HashMap<String, String> foodInfo) {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
                         int counter = 0;
-                        for (String key : foodInfo.keySet()) {
-                            mFoodName.add(counter, key);
-                            mFoodImagePath.add(counter, foodInfo.get(key));
+                        // Go through all key-value pairs.
+                        for (DataSnapshot ds : dataSnapshot.getChildren() ){
+                            String foodName = ds.getKey().toString(); // Get all keys alphabetically
+                            String foodImage = ds.getValue().toString(); // Get all values alphabetically
+
+                            mFoodName.add(counter, foodName);
+                            mFoodImagePath.add(counter, foodImage);
                             counter++;
                         }
                         notifyDataSetChanged();
+                        mDb.removeSnackListener(this);
                     }
-                });
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "Failed to read value.", databaseError.toException());
+                    }
+                };
+                mDb.addSnackListener(snackValueEventListener);
                 break;
         }
     }

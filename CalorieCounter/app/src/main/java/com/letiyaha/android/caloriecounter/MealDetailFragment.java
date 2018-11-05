@@ -7,11 +7,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.letiyaha.android.caloriecounter.Models.Database;
 
 import java.util.HashMap;
@@ -24,12 +28,15 @@ import butterknife.ButterKnife;
 public class MealDetailFragment extends Fragment implements MealDetailAdapter.MealAdapterOnClickHandler {
 
     private Context mContext;
+    private Database mDb;
 
     private String mClickedMeal;
 
     private MealDetailAdapter mMealDetailAdapter;
 
     private HashMap<String, Boolean> mFoodClicked = new HashMap<String, Boolean>();
+
+    private static final String TAG = MealDetailFragment.class.getSimpleName();
 
     @BindView(R.id.recyclerview_food) RecyclerView mRecyclerView;
 
@@ -65,20 +72,35 @@ public class MealDetailFragment extends Fragment implements MealDetailAdapter.Me
 
         mRecyclerView.setAdapter(mMealDetailAdapter);
 
-        final Database db = Database.getInstance();
+        mDb = Database.getInstance();
 
         // Handle button click 'Add to plate'
         mBtAdd2Plate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get total calorie intake
-                db.seletClickedFoodCal(mFoodClicked, new Database.SelectClickedFoodCalCallback() {
+                // Get total calorie intake and update database
+                ValueEventListener valueEventListener = new ValueEventListener() {
                     @Override
-                    public void onCallback(int totalCal) {
-                        final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                        db.updateCalorieLog(sdf.format(new Date()), mClickedMeal.toLowerCase() + "Cal", totalCal);
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        int totalCal = 0;
+                        for (String foodName : mFoodClicked.keySet()) {
+                            if (mFoodClicked.get(foodName)) {
+                                String foodCal = dataSnapshot.child(foodName).getValue().toString();
+                                totalCal += Integer.parseInt(foodCal);
+                            }
+                        }
+                        mDb.removeClickedFoodCalListener(this);
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                        mDb.updateCalorieLog(sdf.format(new Date()), mClickedMeal.toLowerCase() + "Cal", totalCal);
                     }
-                });
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "Failed to read value.", databaseError.toException());
+                    }
+                };
+                mDb.addClickedFoodCalListener(valueEventListener);
 
                 // Go back to PetDetailActivity.
                 Intent intentToStartPetDetailActivity = new Intent(mContext, PetDetailActivity.class);

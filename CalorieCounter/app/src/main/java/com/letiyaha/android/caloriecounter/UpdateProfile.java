@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.letiyaha.android.caloriecounter.Models.Database;
 import com.letiyaha.android.caloriecounter.Models.Profile;
 import com.letiyaha.android.caloriecounter.Models.Util;
@@ -20,6 +24,10 @@ import butterknife.ButterKnife;
 public class UpdateProfile extends AppCompatActivity {
 
     private Context mContext;
+    private Database mDb;
+    private ValueEventListener mValueEventListener;
+
+    private static final String TAG = UpdateProfile.class.getSimpleName();
 
     private static final String ICON_USER = "https://cdn.pixabay.com/photo/2016/04/26/12/25/male-1354358__480.png";
 //    private static final String ICON_USER = "https://cdn.pixabay.com/photo/2016/04/15/18/05/computer-1331579__480.png";
@@ -71,17 +79,23 @@ public class UpdateProfile extends AppCompatActivity {
         Picasso.with(mContext).load(ICON_HEIGHT).into(mIvHeight);
         Picasso.with(mContext).load(ICON_WEIGHT).into(mIvWeight);
 
-        // Set up hint displays
-        final Database db = Database.getInstance();
-        db.readProfile(new Database.ReadProfileCallback() {
+        mDb = Database.getInstance();
+
+        mValueEventListener = new ValueEventListener() {
             @Override
-            public void onCallback(Profile profile) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Profile profile = dataSnapshot.getValue(Profile.class);
                 mEtUsername.setText(profile.getUserName().toString());
                 mEtDob.setText(profile.getDateOfBirth().toString());
                 mEtHeight.setText(profile.getHeight().toString());
                 mEtWeight.setText(profile.getWeight().toString());
             }
-        });
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        };
 
         // Handle button 'Finish' click
         mBtFinish.setOnClickListener(new View.OnClickListener() {
@@ -89,16 +103,16 @@ public class UpdateProfile extends AppCompatActivity {
             public void onClick(View v) {
                 // 1. Update data in db
                 if (mEtUsername.getText().toString().length() != 0) {
-                    db.updateProfile("userName", mEtUsername.getText().toString());
+                    mDb.updateProfile("userName", mEtUsername.getText().toString());
                 }
                 if (mEtDob.getText().toString().length() != 0 && Util.isDateValid(mEtDob.getText().toString(), "yyyy/MM/dd")) {
-                    db.updateProfile("dateOfBirth", mEtDob.getText().toString());
+                    mDb.updateProfile("dateOfBirth", mEtDob.getText().toString());
                 }
                 if (mEtHeight.getText().toString().length() != 0 && Util.isNumber(mEtHeight.getText().toString())) {
-                    db.updateProfile("height", mEtHeight.getText().toString());
+                    mDb.updateProfile("height", mEtHeight.getText().toString());
                 }
                 if (mEtWeight.getText().toString().length() != 0 && Util.isNumber(mEtWeight.getText().toString())) {
-                    db.updateProfile("weight", mEtWeight.getText().toString());
+                    mDb.updateProfile("weight", mEtWeight.getText().toString());
                 }
                 // 2. Go back to PetDetailActivity.
                 Intent intentToStartPetDetailActivity = new Intent(mContext, PetDetailActivity.class);
@@ -106,5 +120,17 @@ public class UpdateProfile extends AppCompatActivity {
                 startActivity(intentToStartPetDetailActivity);
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mDb.addProfileListener(mValueEventListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mDb.removeProfileListener(mValueEventListener);
     }
 }

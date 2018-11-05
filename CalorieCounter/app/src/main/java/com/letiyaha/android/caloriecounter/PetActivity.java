@@ -4,13 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.letiyaha.android.caloriecounter.Models.Database;
+import com.letiyaha.android.caloriecounter.Models.PetProfile;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -19,8 +24,13 @@ import butterknife.ButterKnife;
 public class PetActivity extends AppCompatActivity {
 
     private Context mContext;
+    private Database mDb;
+    private ValueEventListener mPetValueEventListener;
     private ImageView mSelectedPet;
     private String mImageSrc;
+
+    private static final String TAG = PetActivity.class.getSimpleName();
+    private static final String HINT_ENTER_PET_NAME = "Enter Pet Name";
 
     private static final String IMAGE_PET1 = "https://cdn.pixabay.com/photo/2016/05/12/23/03/lamb-1388937__340.png";
     private static final String IMAGE_PET2 = "https://cdn.pixabay.com/photo/2016/04/01/08/29/animals-1298747__340.png";
@@ -58,10 +68,30 @@ public class PetActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
-        // Default pet
+        mDb = Database.getInstance();
+
+        // Default pet image
         mSelectedPet = mIvPet1;
         mImageSrc = IMAGE_PET1;
         Picasso.with(mContext).load(mImageSrc).into(mIvPet);
+
+        // Default pet name
+        mPetValueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                PetProfile petProfile = dataSnapshot.getValue(PetProfile.class);
+                if (petProfile.getPetName().length() > 0) {
+                    mEtPetname.setText(petProfile.getPetName().toString());
+                } else {
+                    mEtPetname.setHint(HINT_ENTER_PET_NAME);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        };
 
         Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet1);
         mIvPet1.setContentDescription(PET1);
@@ -122,5 +152,17 @@ public class PetActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mDb.addPetProfileListener(mPetValueEventListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mDb.removePetProfileListener(mPetValueEventListener);
     }
 }

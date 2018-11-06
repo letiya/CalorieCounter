@@ -30,6 +30,11 @@ public class UpdateProfile extends AppCompatActivity {
 
     private static final String TAG = UpdateProfile.class.getSimpleName();
 
+    private static final String USERNAME = "userName";
+    private static final String DATEOFBIRTH = "dateOfBirth";
+    private static final String HEIGHT = "height";
+    private static final String WEIGHT = "weight";
+
     private static final String ICON_USER = "https://cdn.pixabay.com/photo/2016/04/26/12/25/male-1354358__480.png";
 //    private static final String ICON_USER = "https://cdn.pixabay.com/photo/2016/04/15/18/05/computer-1331579__480.png";
 
@@ -105,30 +110,30 @@ public class UpdateProfile extends AppCompatActivity {
                 boolean updateSucceed = true;
                 // 1. Update data in db
                 if (mEtUsername.getText().toString().length() != 0) {
-                    mDb.updateProfile("userName", mEtUsername.getText().toString());
+                    mDb.updateProfile(USERNAME, mEtUsername.getText().toString());
                 }
                 if (mEtDob.getText().toString().length() != 0) {
                     if (Util.isDateValid(mEtDob.getText().toString(), "yyyy/MM/dd")) {
-                        mDb.updateProfile("dateOfBirth", mEtDob.getText().toString());
+                        mDb.updateProfile(DATEOFBIRTH, mEtDob.getText().toString());
                     } else {
                         updateSucceed = false;
-                        Toast.makeText(mContext, "Date of birth format is incorrect!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, getString(R.string.warning_dob_format_incorrect), Toast.LENGTH_SHORT).show();
                     }
                 }
                 if (mEtHeight.getText().toString().length() != 0) {
                     if (Util.isNumber(mEtHeight.getText().toString())) {
-                        mDb.updateProfile("height", mEtHeight.getText().toString());
+                        mDb.updateProfile(HEIGHT, mEtHeight.getText().toString());
                     } else {
                         updateSucceed = false;
-                        Toast.makeText(mContext, "Entered height is not a number!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, getString(R.string.warning_height_type_incorrect), Toast.LENGTH_SHORT).show();
                     }
                 }
                 if (mEtWeight.getText().toString().length() != 0) {
                     if (Util.isNumber(mEtWeight.getText().toString())) {
-                        mDb.updateProfile("weight", mEtWeight.getText().toString());
+                        mDb.updateProfile(WEIGHT, mEtWeight.getText().toString());
                     } else {
                         updateSucceed = false;
-                        Toast.makeText(mContext, "Entered weight is not a number!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, getString(R.string.warning_weight_type_incorrect), Toast.LENGTH_SHORT).show();
                     }
                 }
                 if (updateSucceed) {

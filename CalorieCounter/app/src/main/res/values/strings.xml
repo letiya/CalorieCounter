@@ -23,6 +23,9 @@
 
     <string name="hint_name_pet">Enter Pet Name</string>
 
+    <string name="warning_pet_name_blank">Pet name is blank!</string>
+    <string name="warning_select_a_pet">Please select a pet!</string>
+
     <string name="label_pet_profile">Pet\'s Profile</string>
     <string name="label_name_detail_pet">Hi, I am </string>
 
@@ -41,6 +44,11 @@
     <string name="action_settings">Settings</string>
     <string name="label_update_profile">Update your profile</string>
     <string name="label_change_pet">Change your pet</string>
+
+    <string name="warning_required_field_blank">Required field is blank!</string>
+    <string name="warning_dob_format_incorrect">Date of birth format is incorrect!</string>
+    <string name="warning_height_type_incorrect">Entered height is not a number!</string>
+    <string name="warning_weight_type_incorrect">Entered weight is not a number!</string>
 
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 

@@ -75,13 +75,13 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mEtUsername.getText().toString().length() == 0 || mEtDob.getText().toString().length() == 0 || mEtHeight.getText().toString().length() == 0 || mEtWeight.getText().toString().length() == 0) {
-                    Toast.makeText(mContext, "Required field is blank!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getString(R.string.warning_required_field_blank), Toast.LENGTH_SHORT).show();
                 } else if (!Util.isDateValid(mEtDob.getText().toString(), "yyyy/MM/dd")) {
-                    Toast.makeText(mContext, "Date of birth format is incorrect!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getString(R.string.warning_dob_format_incorrect), Toast.LENGTH_SHORT).show();
                 } else if (!Util.isNumber(mEtHeight.getText().toString())) {
-                    Toast.makeText(mContext, "Entered height is not a number!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getString(R.string.warning_height_type_incorrect), Toast.LENGTH_SHORT).show();
                 } else if (!Util.isNumber(mEtWeight.getText().toString())) {
-                    Toast.makeText(mContext, "Entered weight is not a number!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getString(R.string.warning_weight_type_incorrect), Toast.LENGTH_SHORT).show();
                 } else {
                     // 1. Save data to db
                     Database db = Database.getInstance();

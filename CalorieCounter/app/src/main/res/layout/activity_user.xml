@@ -75,6 +75,7 @@
                 android:layout_height="@dimen/iv_large_icon"
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:layout_marginRight="@dimen/iv_margin_small"
+                android:layout_marginEnd="@dimen/iv_margin_small"
                 tools:src="@drawable/ic_launcher_background"
                 />
 

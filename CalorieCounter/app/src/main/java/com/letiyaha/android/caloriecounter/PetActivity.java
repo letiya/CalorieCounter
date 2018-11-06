@@ -30,7 +30,6 @@ public class PetActivity extends AppCompatActivity {
     private String mImageSrc;
 
     private static final String TAG = PetActivity.class.getSimpleName();
-    private static final String HINT_ENTER_PET_NAME = "Enter Pet Name";
 
     private static final String IMAGE_PET1 = "https://cdn.pixabay.com/photo/2016/05/12/23/03/lamb-1388937__340.png";
     private static final String IMAGE_PET2 = "https://cdn.pixabay.com/photo/2016/04/01/08/29/animals-1298747__340.png";
@@ -83,7 +82,7 @@ public class PetActivity extends AppCompatActivity {
                 if (petProfile.getPetName().length() > 0) {
                     mEtPetname.setText(petProfile.getPetName().toString());
                 } else {
-                    mEtPetname.setHint(HINT_ENTER_PET_NAME);
+                    mEtPetname.setHint(getString(R.string.hint_name_pet));
                 }
             }
 
@@ -133,9 +132,9 @@ public class PetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mEtPetname.getText().toString().length() == 0) {
-                    Toast.makeText(mContext, "Pet name is blank!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getString(R.string.warning_pet_name_blank), Toast.LENGTH_SHORT).show();
                 } else if (mSelectedPet == null) {
-                    Toast.makeText(mContext, "Please select a pet!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getString(R.string.warning_select_a_pet), Toast.LENGTH_SHORT).show();
                 } else {
                     // 1. Save data to db
                     Database db = Database.getInstance();

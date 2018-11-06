@@ -6,6 +6,17 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Database {
 
+    private static final String PROFILE = "Profile";
+    private static final String PETPROFILE = "PetProfile";
+    private static final String FOOD = "Food";
+    private static final String BREAKFAST = "Breakfast";
+    private static final String LUNCH = "Lunch";
+    private static final String DINNER = "Dinner";
+    private static final String SNACK = "Snack";
+    private static final String FOODCAL = "FoodCal";
+    private static final String CALORIELOG = "CalorieLog";
+
+
     private FirebaseDatabase mDatabase;
     private DatabaseReference mBaseRef;
 
@@ -24,16 +35,16 @@ public class Database {
         mDatabase = FirebaseDatabase.getInstance();
         mBaseRef = mDatabase.getReference();
 
-        mProfileEndPoint = mBaseRef.child("Profile");
-        mPetProfileEndPoint = mBaseRef.child("PetProfile");
+        mProfileEndPoint = mBaseRef.child(PROFILE);
+        mPetProfileEndPoint = mBaseRef.child(PETPROFILE);
 
-        mBreakfastEndPoint = mBaseRef.child("Food").child("Breakfast");
-        mLunchEndPoint = mBaseRef.child("Food").child("Lunch");
-        mDinnerEndPoint = mBaseRef.child("Food").child("Dinner");
-        mSnackEndPoint = mBaseRef.child("Food").child("Snack");
+        mBreakfastEndPoint = mBaseRef.child(FOOD).child(BREAKFAST);
+        mLunchEndPoint = mBaseRef.child(FOOD).child(LUNCH);
+        mDinnerEndPoint = mBaseRef.child(FOOD).child(DINNER);
+        mSnackEndPoint = mBaseRef.child(FOOD).child(SNACK);
 
-        mFoodCalEndPoint = mBaseRef.child("FoodCal");
-        mCalorieLogEndPoint = mBaseRef.child("CalorieLog");
+        mFoodCalEndPoint = mBaseRef.child(FOODCAL);
+        mCalorieLogEndPoint = mBaseRef.child(CALORIELOG);
     }
 
     public static Database getInstance() {

@@ -39,6 +39,7 @@
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginRight="@dimen/iv_margin_small"
             android:layout_marginEnd="@dimen/iv_margin_small"
+            android:contentDescription="@string/content_description_breakfast"
             tools:src="@drawable/ic_launcher_background"
             />
 
@@ -72,6 +73,7 @@
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginRight="@dimen/iv_margin_small"
             android:layout_marginEnd="@dimen/iv_margin_small"
+            android:contentDescription="@string/content_description_lunch"
             tools:src="@drawable/ic_launcher_background"
             />
 
@@ -105,6 +107,7 @@
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginRight="@dimen/iv_margin_small"
             android:layout_marginEnd="@dimen/iv_margin_small"
+            android:contentDescription="@string/content_description_dinner"
             tools:src="@drawable/ic_launcher_background"
             />
 
@@ -138,6 +141,7 @@
             android:layout_marginTop="@dimen/iv_margin_small"
             android:layout_marginRight="@dimen/iv_margin_small"
             android:layout_marginEnd="@dimen/iv_margin_small"
+            android:contentDescription="@string/content_description_snack"
             tools:src="@drawable/ic_launcher_background"
             />
 

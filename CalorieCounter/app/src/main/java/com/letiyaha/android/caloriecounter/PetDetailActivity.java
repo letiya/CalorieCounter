@@ -76,10 +76,13 @@ public class PetDetailActivity extends AppCompatActivity {
                 mTvPetname.setText(petProfile.getPetName());
                 if (petProfile.getPetImage().equals(IMAGE_PET1)) {
                     Picasso.with(mContext).load(IMAGE_PET1).into(mIvPet);
+                    mIvPet.setContentDescription(getString(R.string.content_description_sheep));
                 } else if (petProfile.getPetImage().equals(IMAGE_PET2)) {
                     Picasso.with(mContext).load(IMAGE_PET2).into(mIvPet);
+                    mIvPet.setContentDescription(getString(R.string.content_description_turtle));
                 }  else if (petProfile.getPetImage().equals(IMAGE_PET3)) {
                     Picasso.with(mContext).load(IMAGE_PET3).into(mIvPet);
+                    mIvPet.setContentDescription(getString(R.string.content_description_zibra));
                 }
             }
 

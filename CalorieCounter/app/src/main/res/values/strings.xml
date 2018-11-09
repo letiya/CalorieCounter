@@ -52,6 +52,25 @@
 
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
-    <string name="content_descript_loading">Loading</string>
+    <string name="content_description_loading">Loading</string>
+
+    <string name="content_description_pet_selected">Selected pet thumbnail</string>
+    <string name="content_description_sheep">Sheep</string>
+    <string name="content_description_turtle">Turtle</string>
+    <string name="content_description_zibra">Zibra</string>
+
+    <string name="content_description_user_name">User name thumbnail</string>
+    <string name="content_description_dob">Date of birth thumbnail</string>
+    <string name="content_description_height">Height thumbnail</string>
+    <string name="content_description_weight">Weight thumbnail</string>
+
+    <string name="content_description_breakfast">Breakfast thumbnail</string>
+    <string name="content_description_lunch">Lunch thumbnail</string>
+    <string name="content_description_dinner">Dinner thumbnail</string>
+    <string name="content_description_snack">Snack thumbnail</string>
+
+    <string name="content_description_food">Food thumbnail</string>
+
+    <string name="content_description_widget">Pet widget thumbnail</string>
 
 </resources>

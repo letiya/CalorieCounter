@@ -56,11 +56,6 @@ public class MealFragment extends Fragment {
     @BindView(R.id.tv_snack)
     TextView mTvSnack;
 
-    // Mandatory constructor for instantiating the fragment.
-    public MealFragment() {
-
-    }
-
     /**
      * Inflates the fragment layout.
      */

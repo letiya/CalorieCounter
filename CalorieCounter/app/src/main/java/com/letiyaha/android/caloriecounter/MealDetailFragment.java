@@ -43,9 +43,6 @@ public class MealDetailFragment extends Fragment implements MealDetailAdapter.Me
     @BindView(R.id.bt_add_to_plate)
     Button mBtAdd2Plate;
 
-    // Mandatory constructor for instantiating the fragment.
-    public MealDetailFragment() {}
-
     public void setClickedMeal(String clickedMeal) {
         mClickedMeal = clickedMeal;
     }

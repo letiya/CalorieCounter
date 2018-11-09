@@ -18,8 +18,6 @@ import com.squareup.picasso.Picasso;
 
 public class PetWidgetRender {
 
-    public PetWidgetRender() {}
-
     private static final String TAG = PetWidgetRender.class.getSimpleName();
 
     private static final String ICON_NO_PET = "https://cdn.pixabay.com/photo/2016/11/16/17/27/question-mark-1829459__480.png";

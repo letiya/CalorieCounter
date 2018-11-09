@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Util {
+    
+    private Util() {}
 
     /**
      * To verify if input date follows the format.

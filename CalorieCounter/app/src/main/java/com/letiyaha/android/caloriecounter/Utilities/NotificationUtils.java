@@ -22,7 +22,7 @@ public class NotificationUtils {
     private static final int MEAL_REMINDER_PENDING_INTENT_ID = 2018; // This pending intent id is used to uniquely reference the pending intent
     private static final String MEAL_REMINDER_NOTIFICATION_CHANNEL_ID = "reminder_notification_channel";
 
-    public static void remindUserBecauseCharging(Context context) {
+    public static void remindUserToEat(Context context) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

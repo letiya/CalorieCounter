@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.letiyaha.android.caloriecounter.Models.Database;
 import com.letiyaha.android.caloriecounter.Models.PetProfile;
+import com.letiyaha.android.caloriecounter.Utilities.ReminderUtilities;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         };
+        ReminderUtilities.scheduleEatReminder(this);
     }
 
     @Override

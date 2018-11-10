@@ -73,4 +73,8 @@
 
     <string name="content_description_widget">Pet widget thumbnail</string>
 
+    <string name="main_notification_channel_name">Primary</string>
+    <string name="reminder_notification_title">Where\'s the food?</string>
+    <string name="reminder_notification_body">Time to eat something!</string>
+
 </resources>

@@ -58,6 +58,7 @@
     <string name="content_description_sheep">Sheep</string>
     <string name="content_description_turtle">Turtle</string>
     <string name="content_description_zibra">Zibra</string>
+    <string name="content_description_yourpet">Image of your pet</string>
 
     <string name="content_description_user_name">User name thumbnail</string>
     <string name="content_description_dob">Date of birth thumbnail</string>

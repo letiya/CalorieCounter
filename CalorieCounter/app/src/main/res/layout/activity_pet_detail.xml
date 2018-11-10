@@ -47,6 +47,7 @@
             android:layout_marginLeft="@dimen/iv_margin_small"
             android:layout_marginStart="@dimen/iv_margin_small"
             android:layout_gravity="center"
+            android:contentDescription="@string/content_description_yourpet"
             tools:src="@drawable/ic_launcher_foreground"
             />
 

@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:singleLine="true"
+                android:hint="@string/hint_name_owner"
                 />
 
         </LinearLayout>
@@ -85,6 +86,7 @@
                 android:id="@+id/et_dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/hint_dob_owner"
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:maxLength="10"
                 android:singleLine="true"
@@ -125,6 +127,7 @@
                     android:layout_marginTop="@dimen/iv_margin_small"
                     android:maxLength="4"
                     android:singleLine="true"
+                    android:hint="@string/hint_height_owner"
                     />
 
                 <TextView
@@ -172,6 +175,7 @@
                     android:layout_marginTop="@dimen/iv_margin_small"
                     android:maxLength="4"
                     android:singleLine="true"
+                    android:hint="@string/hint_weight_owner"
                     />
 
                 <TextView

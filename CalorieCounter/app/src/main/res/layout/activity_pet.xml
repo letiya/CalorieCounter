@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:singleLine="true"
+                android:hint="@string/hint_name_pet"
                 />
 
         </LinearLayout>
@@ -76,6 +77,7 @@
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:layout_marginLeft="@dimen/iv_margin_small"
                 android:layout_marginStart="@dimen/iv_margin_small"
+                android:contentDescription="@string/content_description_sheep"
                 tools:src="@drawable/ic_launcher_foreground"
                 />
 
@@ -86,6 +88,7 @@
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:layout_marginLeft="@dimen/iv_margin_small"
                 android:layout_marginStart="@dimen/iv_margin_small"
+                android:contentDescription="@string/content_description_turtle"
                 tools:src="@drawable/ic_launcher_foreground"
                 />
 
@@ -109,6 +112,7 @@
                 android:layout_marginTop="@dimen/iv_margin_small"
                 android:layout_marginLeft="@dimen/iv_margin_small"
                 android:layout_marginStart="@dimen/iv_margin_small"
+                android:contentDescription="@string/content_description_zibra"
                 tools:src="@drawable/ic_launcher_foreground"
                 />
 
